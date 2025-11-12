@@ -148,14 +148,6 @@ function App() {
                 }} 
             />
             
-            {/* إضافة زر الواتساب الثابت */}
-            <WhatsAppButton 
-                phoneNumber="96597131223"
-                defaultMessage="مرحباً، أود حجز استشارة مع الكابتن أحمد جابر أشكناني"
-                iconSize={36}
-                iconColor="#FFFFFF"
-            />
-            
             <Analytics />
         </>
     );
