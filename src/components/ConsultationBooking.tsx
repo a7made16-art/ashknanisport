@@ -407,7 +407,16 @@ const processBooking = async () => {
         window.location.href = link;
         
         // الطريقة الاحتياطية: إذا لم يفتح خلال 500ms
-       
+        setTimeout(() => {
+          // إنشاء رابط وهمي والنقر عليه
+          const a = document.createElement('a');
+          a.href = link;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, 100);
       } catch (error) {
         console.error('Failed to open WhatsApp:', error);
         // الحل الأخير: توجيه المستخدم يدوياً
