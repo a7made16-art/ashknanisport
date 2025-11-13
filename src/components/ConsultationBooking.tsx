@@ -313,98 +313,146 @@ const isDayDisabled = (date: Date) => {
     return isValid;
   };
 
-  const createWhatsAppLink = () => {
-    const phoneNumber = "96597131223";
-    const selectedService = formData.service ? content.services.find(s => s.id === parseInt(formData.service)) : null;
+// تحسين دالة إنشاء رابط الواتساب
+const createWhatsAppLink = () => {
+  const phoneNumber = "96597131223";
+  const selectedService = formData.service ? content.services.find(s => s.id === parseInt(formData.service)) : null;
+  
+  const day = formData.date.getDate();
+  const month = formData.date.getMonth() + 1;
+  const year = formData.date.getFullYear();
+  
+  const formattedDate = language === 'ar' 
+    ? `${day}/${month}/${year}` 
+    : `${month}/${day}/${year}`;
+  
+  let priceText = '';
+  if (selectedService) {
+    if (typeof selectedService.price === 'number' || (!isNaN(Number(selectedService.price)) && selectedService.price !== '')) {
+      priceText = language === 'ar' 
+        ? `${selectedService.price} دينار كويتي` 
+        : `${selectedService.price} KWD`;
+    } else {
+      priceText = selectedService.price.toString();
+    }
+  }
+  
+  const message = t.whatsappMessage(
+    formData.name,
+    formData.phone,
+    selectedService ? selectedService.title : '',
+    priceText,
+    formattedDate,
+    formData.time
+  );
+  
+  // تشفير الرسالة بشكل متوافق مع iPhone
+  const encodedMessage = encodeURIComponent(message)
+    .replace(/!/g, '%21')
+    .replace(/'/g, '%27')
+    .replace(/\(/g, '%28')
+    .replace(/\)/g, '%29')
+    .replace(/\*/g, '%2A')
+    .replace(/%20/g, '+');
     
-    // تنسيق التاريخ لعرضه - تعديل هنا لاستخدام التقويم الميلادي
-    const day = formData.date.getDate();
-    const month = formData.date.getMonth() + 1; // الشهر يبدأ من 0
-    const year = formData.date.getFullYear();
+  // استخدام الصيغة المختصرة للواتساب (الأفضل للجوال)
+  return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+};
+
+// تعديل دالة processBooking لتحسين التوافق مع iPhone
+const processBooking = async () => {
+  if (!validateForm()) return;
+
+  setBookingStatus({ type: 'checking', message: t.checkingAvailability });
+
+  const selectedService = content.services.find(s => s.id === parseInt(formData.service));
+  const startDateTime = new Date(formData.date);
+  const timeParts = formData.time.match(/\d+/g);
+  if (timeParts) {
+    let hours = parseInt(timeParts[0]);
+    const minutes = parseInt(timeParts[1] || '0');
     
-    const formattedDate = language === 'ar' 
-      ? `${day}/${month}/${year}` 
-      : `${month}/${day}/${year}`;
-    
-    // تعديل طريقة عرض السعر
-    let priceText = '';
-    if (selectedService) {
-      // التحقق إذا كان السعر رقمًا
-      if (typeof selectedService.price === 'number' || (!isNaN(Number(selectedService.price)) && selectedService.price !== '')) {
-        priceText = language === 'ar' 
-          ? `${selectedService.price} دينار كويتي` 
-          : `${selectedService.price} KWD`;
-      } else {
-        // إذا كان السعر نصًا (مثل "بدون رسوم" أو "no fees")
-        priceText = selectedService.price.toString();
-      }
+    if (formData.time.includes('مساءً') || formData.time.includes('PM')) {
+      if (hours < 12) hours += 12;
+    } else if (formData.time.includes('صباحاً') || formData.time.includes('AM')) {
+      if (hours === 12) hours = 0;
     }
     
-    const message = t.whatsappMessage(
-      formData.name,
-      formData.phone,
-      selectedService ? selectedService.title : '',
-      priceText,
-      formattedDate,
-      formData.time
-    );
-    
-    return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-  };
+    startDateTime.setHours(hours, minutes, 0, 0);
+  }
+  
+  const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000);
+  
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbwGx9O0GgxeU6UdHmxumeKkCK6zTSfTNcES4WRyAht-fIlOuSGA77sFTKEjeo_71cDmrg/exec', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: `موعد استشارة - ${formData.name}`,
+        start: toKuwaitLocalISOString(startDateTime),
+        end: toKuwaitLocalISOString(endDateTime),
+        timezone: 'Asia/Kuwait',
+      }),
+    });
 
-  const handleWhatsAppSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateForm()) return;
-
-    // تعيين حالة التحقق من التوفر
-    setBookingStatus({ type: 'checking', message: t.checkingAvailability });
-
-    const selectedService = content.services.find(s => s.id === parseInt(formData.service));
-    const startDateTime = new Date(formData.date);
-    const timeParts = formData.time.match(/\d+/g);
-    if (timeParts) {
-      let hours = parseInt(timeParts[0]);
-      const minutes = parseInt(timeParts[1] || '0');
+    const data = await response.json();
+    if (data.available) {
+      setBookingStatus({ type: 'success', message: t.bookingSuccess });
       
-      // تحويل الوقت إلى 24 ساعة
-      if (formData.time.includes('مساءً') || formData.time.includes('PM')) {
-        if (hours < 12) hours += 12;
-      } else if (formData.time.includes('صباحاً') || formData.time.includes('AM')) {
-        if (hours === 12) hours = 0;
-      }
+      // إنشاء الرابط
+      const link = createWhatsAppLink();
       
-      startDateTime.setHours(hours, minutes, 0, 0);
-    }
-    
-    const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000); // ساعة واحدة
-    try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbwGx9O0GgxeU6UdHmxumeKkCK6zTSfTNcES4WRyAht-fIlOuSGA77sFTKEjeo_71cDmrg/exec', {
-        method: 'POST',
-        body: JSON.stringify({
-          title: `موعد استشارة - ${formData.name}`,
-          start: toKuwaitLocalISOString(startDateTime),
-          end: toKuwaitLocalISOString(endDateTime),
-          timezone: 'Asia/Kuwait', // إضافة التوقيت الصريح
-        }),
-      });
-
-      const data = await response.json();
-      if (data.available) {
-        setBookingStatus({ type: 'success', message: t.bookingSuccess });
-        window.open(createWhatsAppLink(), '_blank');
-      } else {
-        setBookingStatus({ type: 'error', message: t.slotBooked });
+      // محاولة فتح الواتساب بطرق مختلفة للتوافق مع iPhone
+      try {
+        // الطريقة الأولى: استخدام window.location.href (الأفضل لـ iPhone)
+        window.location.href = link;
+        
+        // الطريقة الاحتياطية: إذا لم يفتح خلال 500ms
+        setTimeout(() => {
+          // إنشاء رابط وهمي والنقر عليه
+          const a = document.createElement('a');
+          a.href = link;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, 500);
+      } catch (error) {
+        console.error('Failed to open WhatsApp:', error);
+        // الحل الأخير: توجيه المستخدم يدوياً
+        alert(language === 'ar' 
+          ? 'يرجى فتح الواتساب يدوياً وإرسال الرسالة التالية:\n\n' + 
+            t.whatsappMessage(
+              formData.name,
+              formData.phone,
+              selectedService ? selectedService.title : '',
+              selectedService ? (typeof selectedService.price === 'number' ? `${selectedService.price} دينار كويتي` : selectedService.price) : '',
+              `${formData.date.getDate()}/${formData.date.getMonth() + 1}/${formData.date.getFullYear()}`,
+              formData.time
+            )
+          : 'Please manually open WhatsApp and send the following message:\n\n' + 
+            t.whatsappMessage(
+              formData.name,
+              formData.phone,
+              selectedService ? selectedService.title : '',
+              selectedService ? (typeof selectedService.price === 'number' ? `${selectedService.price} KWD` : selectedService.price) : '',
+              `${formData.date.getMonth() + 1}/${formData.date.getDate()}/${formData.date.getFullYear()}`,
+              formData.time
+            )
+        );
       }
-    } catch (error) {
-      setBookingStatus({ 
-        type: 'error', 
-        message: language === 'ar' 
-          ? 'حدث خطأ أثناء التحقق من التوفر. يرجى المحاولة مرة أخرى.' 
-          : 'An error occurred while checking availability. Please try again.'
-      });
+    } else {
+      setBookingStatus({ type: 'error', message: t.slotBooked });
     }
-  };
+  } catch (error) {
+    setBookingStatus({ 
+      type: 'error', 
+      message: language === 'ar' 
+        ? 'حدث خطأ أثناء التحقق من التوفر. يرجى المحاولة مرة أخرى.' 
+        : 'An error occurred while checking availability. Please try again.'
+    });
+  }
+};
 
   // دالة لتحويل التاريخ إلى صيغة ISO مع الحفاظ على توقيت الكويت
   function toKuwaitLocalISOString(date: Date) {
@@ -422,6 +470,18 @@ const isDayDisabled = (date: Date) => {
     // إرجاع الصيغة المطلوبة مع تحديد المنطقة الزمنية
     return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}+03:00`;
   }
+
+  // دالة للتعامل مع إرسال النموذج
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await processBooking();
+  };
+
+  // دالة للتعامل مع النقر على رابط الواتساب
+  const handleWhatsAppClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    await processBooking();
+  };
 
   return (
     <section className="section consultation-booking" id="consultation-booking">
@@ -473,7 +533,7 @@ const isDayDisabled = (date: Date) => {
               </div>
             )}
             
-            <form onSubmit={handleWhatsAppSubmit} className="booking-form">
+            <form onSubmit={handleSubmit} className="booking-form">
               <div className="form-group">
                 <label htmlFor="name">{content.form.name}</label>
                 <input
@@ -563,24 +623,16 @@ const isDayDisabled = (date: Date) => {
               </div>
               
               <div className="form-actions">
-              <a
-                href={bookingStatus.type === 'success' ? createWhatsAppLink() : '#'}
-                onClick={(e) => {
-                  if (!validateForm()) {
-                    e.preventDefault();
-                    return;
-                  }
-                  e.preventDefault();
-                  handleWhatsAppSubmit(e);
-                }}
-                className={`whatsapp-btn ${bookingStatus.type === 'checking' ? 'disabled' : ''}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-whatsapp"></i> {t.whatsappButton}
-              </a>
-            </div>
-
+                <a
+                  href="#"
+                  onClick={handleWhatsAppClick}
+                  className={`whatsapp-btn ${bookingStatus.type === 'checking' ? 'disabled' : ''}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-whatsapp"></i> {t.whatsappButton}
+                </a>
+              </div>
             </form>
           </div>
         </div>
@@ -628,7 +680,27 @@ const isDayDisabled = (date: Date) => {
           to { transform: rotate(360deg); }
         }
         
-        .whatsapp-btn:disabled {
+        .whatsapp-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          background-color: #25D366;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+          text-decoration: none;
+          transition: background-color 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+          background-color: #128C7E;
+        }
+        
+        .whatsapp-btn.disabled {
           opacity: 0.7;
           cursor: not-allowed;
         }
