@@ -353,58 +353,61 @@ const isDayDisabled = (date: Date) => {
   };
 
   const handleWhatsAppSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!validateForm()) return;
+  if (!validateForm()) return;
 
-    // تعيين حالة التحقق من التوفر
-    setBookingStatus({ type: 'checking', message: t.checkingAvailability });
+  // تعيين حالة التحقق من التوفر
+  setBookingStatus({ type: 'checking', message: t.checkingAvailability });
 
-    const selectedService = content.services.find(s => s.id === parseInt(formData.service));
-    const startDateTime = new Date(formData.date);
-    const timeParts = formData.time.match(/\d+/g);
-    if (timeParts) {
-      let hours = parseInt(timeParts[0]);
-      const minutes = parseInt(timeParts[1] || '0');
-      
-      // تحويل الوقت إلى 24 ساعة
-      if (formData.time.includes('مساءً') || formData.time.includes('PM')) {
-        if (hours < 12) hours += 12;
-      } else if (formData.time.includes('صباحاً') || formData.time.includes('AM')) {
-        if (hours === 12) hours = 0;
-      }
-      
-      startDateTime.setHours(hours, minutes, 0, 0);
+  const selectedService = content.services.find(s => s.id === parseInt(formData.service));
+  const startDateTime = new Date(formData.date);
+  const timeParts = formData.time.match(/\d+/g);
+  if (timeParts) {
+    let hours = parseInt(timeParts[0]);
+    const minutes = parseInt(timeParts[1] || '0');
+    
+    // تحويل الوقت إلى 24 ساعة
+    if (formData.time.includes('مساءً') || formData.time.includes('PM')) {
+      if (hours < 12) hours += 12;
+    } else if (formData.time.includes('صباحاً') || formData.time.includes('AM')) {
+      if (hours === 12) hours = 0;
     }
     
-    const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000); // ساعة واحدة
-    try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbwGx9O0GgxeU6UdHmxumeKkCK6zTSfTNcES4WRyAht-fIlOuSGA77sFTKEjeo_71cDmrg/exec', {
-        method: 'POST',
-        body: JSON.stringify({
-          title: `موعد استشارة - ${formData.name}`,
-          start: toKuwaitLocalISOString(startDateTime),
-          end: toKuwaitLocalISOString(endDateTime),
-          timezone: 'Asia/Kuwait', // إضافة التوقيت الصريح
-        }),
-      });
+    startDateTime.setHours(hours, minutes, 0, 0);
+  }
+  
+  const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000); // ساعة واحدة
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbwGx9O0GgxeU6UdHmxumeKkCK6zTSfTNcES4WRyAht-fIlOuSGA77sFTKEjeo_71cDmrg/exec', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: `موعد استشارة - ${formData.name}`,
+        start: toKuwaitLocalISOString(startDateTime),
+        end: toKuwaitLocalISOString(endDateTime),
+        timezone: 'Asia/Kuwait', // إضافة التوقيت الصريح
+      }),
+    });
 
-      const data = await response.json();
-      if (data.available) {
-        setBookingStatus({ type: 'success', message: t.bookingSuccess });
-        window.open(createWhatsAppLink(), '_blank');
-      } else {
-        setBookingStatus({ type: 'error', message: t.slotBooked });
-      }
-    } catch (error) {
-      setBookingStatus({ 
-        type: 'error', 
-        message: language === 'ar' 
-          ? 'حدث خطأ أثناء التحقق من التوفر. يرجى المحاولة مرة أخرى.' 
-          : 'An error occurred while checking availability. Please try again.'
-      });
+    const data = await response.json();
+    if (data.available) {
+      setBookingStatus({ type: 'success', message: t.bookingSuccess });
+      
+      // استخدام window.location.href بدلاً من window.open
+      const whatsappLink = createWhatsAppLink();
+      window.location.href = whatsappLink;
+    } else {
+      setBookingStatus({ type: 'error', message: t.slotBooked });
     }
-  };
+  } catch (error) {
+    setBookingStatus({ 
+      type: 'error', 
+      message: language === 'ar' 
+        ? 'حدث خطأ أثناء التحقق من التوفر. يرجى المحاولة مرة أخرى.' 
+        : 'An error occurred while checking availability. Please try again.'
+    });
+  }
+};
 
   // دالة لتحويل التاريخ إلى صيغة ISO مع الحفاظ على توقيت الكويت
   function toKuwaitLocalISOString(date: Date) {
