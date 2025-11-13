@@ -313,121 +313,98 @@ const isDayDisabled = (date: Date) => {
     return isValid;
   };
 
-const handleWhatsAppSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-
-  if (!validateForm()) return;
-
-  setBookingStatus({ type: 'checking', message: t.checkingAvailability });
-
-  const selectedService = content.services.find(s => s.id === parseInt(formData.service));
-  const startDateTime = new Date(formData.date);
-  const timeParts = formData.time.match(/\d+/g);
-  
-  if (timeParts) {
-    let hours = parseInt(timeParts[0]);
-    const minutes = parseInt(timeParts[1] || '0');
+  const createWhatsAppLink = () => {
+    const phoneNumber = "96597131223";
+    const selectedService = formData.service ? content.services.find(s => s.id === parseInt(formData.service)) : null;
     
-    if (formData.time.includes('مساءً') || formData.time.includes('PM')) {
-      if (hours < 12) hours += 12;
-    } else if (formData.time.includes('صباحاً') || formData.time.includes('AM')) {
-      if (hours === 12) hours = 0;
+    // تنسيق التاريخ لعرضه - تعديل هنا لاستخدام التقويم الميلادي
+    const day = formData.date.getDate();
+    const month = formData.date.getMonth() + 1; // الشهر يبدأ من 0
+    const year = formData.date.getFullYear();
+    
+    const formattedDate = language === 'ar' 
+      ? `${day}/${month}/${year}` 
+      : `${month}/${day}/${year}`;
+    
+    // تعديل طريقة عرض السعر
+    let priceText = '';
+    if (selectedService) {
+      // التحقق إذا كان السعر رقمًا
+      if (typeof selectedService.price === 'number' || (!isNaN(Number(selectedService.price)) && selectedService.price !== '')) {
+        priceText = language === 'ar' 
+          ? `${selectedService.price} دينار كويتي` 
+          : `${selectedService.price} KWD`;
+      } else {
+        // إذا كان السعر نصًا (مثل "بدون رسوم" أو "no fees")
+        priceText = selectedService.price.toString();
+      }
     }
     
-    startDateTime.setHours(hours, minutes, 0, 0);
-  }
-  
-  const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000);
-  
-  try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbwGx9O0GgxeU6UdHmxumeKkCK6zTSfTNcES4WRyAht-fIlOuSGA77sFTKEjeo_71cDmrg/exec', {
-      method: 'POST',
-      body: JSON.stringify({
-        title: `موعد استشارة - ${formData.name}`,
-        start: toKuwaitLocalISOString(startDateTime),
-        end: toKuwaitLocalISOString(endDateTime),
-        timezone: 'Asia/Kuwait',
-      }),
-    });
+    const message = t.whatsappMessage(
+      formData.name,
+      formData.phone,
+      selectedService ? selectedService.title : '',
+      priceText,
+      formattedDate,
+      formData.time
+    );
+    
+    return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  };
 
-    const data = await response.json();
-    if (data.available) {
-      setBookingStatus({ type: 'success', message: t.bookingSuccess });
+  const handleWhatsAppSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    // تعيين حالة التحقق من التوفر
+    setBookingStatus({ type: 'checking', message: t.checkingAvailability });
+
+    const selectedService = content.services.find(s => s.id === parseInt(formData.service));
+    const startDateTime = new Date(formData.date);
+    const timeParts = formData.time.match(/\d+/g);
+    if (timeParts) {
+      let hours = parseInt(timeParts[0]);
+      const minutes = parseInt(timeParts[1] || '0');
       
-      // تأخير قبل فتح WhatsApp لضمان تحديث الواجهة
-      setTimeout(() => {
-        const whatsappLink = createWhatsAppLink();
-        console.log('WhatsApp Link:', whatsappLink); // للتصحيح
-        
-        // جرب الطريقة الأولى
-        const win = window.open(whatsappLink, '_blank');
-        
-        // إذا ما اشتغلت، جرب الطريقة البديلة
-        if (!win || win.closed || typeof win.closed === 'undefined') {
-          // نسخ الرابط للـ clipboard وعرض رسالة
-          navigator.clipboard.writeText(whatsappLink).then(() => {
-            alert(language === 'ar' 
-              ? 'تم نسخ رابط الواتساب. يرجى فتح الواتساب ولصق الرابط'
-              : 'WhatsApp link copied. Please open WhatsApp and paste the link'
-            );
-          });
-        }
-      }, 500);
-    } else {
-      setBookingStatus({ type: 'error', message: t.slotBooked });
+      // تحويل الوقت إلى 24 ساعة
+      if (formData.time.includes('مساءً') || formData.time.includes('PM')) {
+        if (hours < 12) hours += 12;
+      } else if (formData.time.includes('صباحاً') || formData.time.includes('AM')) {
+        if (hours === 12) hours = 0;
+      }
+      
+      startDateTime.setHours(hours, minutes, 0, 0);
     }
-  } catch (error) {
-    console.error('Booking error:', error);
-    setBookingStatus({ 
-      type: 'error', 
-      message: language === 'ar' 
-        ? 'حدث خطأ أثناء التحقق من التوفر. يرجى المحاولة مرة أخرى.' 
-        : 'An error occurred while checking availability. Please try again.'
-    });
-  }
-};
+    
+    const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000); // ساعة واحدة
+    try {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbwGx9O0GgxeU6UdHmxumeKkCK6zTSfTNcES4WRyAht-fIlOuSGA77sFTKEjeo_71cDmrg/exec', {
+        method: 'POST',
+        body: JSON.stringify({
+          title: `موعد استشارة - ${formData.name}`,
+          start: toKuwaitLocalISOString(startDateTime),
+          end: toKuwaitLocalISOString(endDateTime),
+          timezone: 'Asia/Kuwait', // إضافة التوقيت الصريح
+        }),
+      });
 
-// 2. تحسين دالة إنشاء رابط WhatsApp
-const createWhatsAppLink = () => {
-  // تأكد من الرقم - يجب أن يكون بصيغة صحيحة: 966 (السعودي) أو 965 (الكويت) إلخ
-  // بدون علامات أو مسافات
-  const phoneNumber = "965971312223"; // تأكد من الرقم صحيح بدون علامات
-  
-  const selectedService = formData.service 
-    ? content.services.find(s => s.id === parseInt(formData.service)) 
-    : null;
-  
-  const day = formData.date.getDate();
-  const month = formData.date.getMonth() + 1;
-  const year = formData.date.getFullYear();
-  
-  const formattedDate = language === 'ar' 
-    ? `${day}/${month}/${year}` 
-    : `${month}/${day}/${year}`;
-  
-  let priceText = '';
-  if (selectedService) {
-    if (typeof selectedService.price === 'number' || (!isNaN(Number(selectedService.price)) && selectedService.price !== '')) {
-      priceText = language === 'ar' 
-        ? `${selectedService.price} دينار كويتي` 
-        : `${selectedService.price} KWD`;
-    } else {
-      priceText = selectedService.price.toString();
+      const data = await response.json();
+      if (data.available) {
+        setBookingStatus({ type: 'success', message: t.bookingSuccess });
+        window.open(createWhatsAppLink(), '_blank');
+      } else {
+        setBookingStatus({ type: 'error', message: t.slotBooked });
+      }
+    } catch (error) {
+      setBookingStatus({ 
+        type: 'error', 
+        message: language === 'ar' 
+          ? 'حدث خطأ أثناء التحقق من التوفر. يرجى المحاولة مرة أخرى.' 
+          : 'An error occurred while checking availability. Please try again.'
+      });
     }
-  }
-  
-  const message = t.whatsappMessage(
-    formData.name,
-    formData.phone,
-    selectedService ? selectedService.title : '',
-    priceText,
-    formattedDate,
-    formData.time
-  );
-  
-  // اختبر الرابط دي - هذي الطريقة الصحيحة
-  return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-};
+  };
 
   // دالة لتحويل التاريخ إلى صيغة ISO مع الحفاظ على توقيت الكويت
   function toKuwaitLocalISOString(date: Date) {
