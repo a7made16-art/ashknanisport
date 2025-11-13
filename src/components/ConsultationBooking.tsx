@@ -563,14 +563,24 @@ const isDayDisabled = (date: Date) => {
               </div>
               
               <div className="form-actions">
-                <button 
-                  type="submit" 
-                  className="whatsapp-btn"
-                  disabled={bookingStatus.type === 'checking'}
-                >
-                  <i className="fab fa-whatsapp"></i> {t.whatsappButton}
-                </button>
-              </div>
+              <a
+                href={bookingStatus.type === 'success' ? createWhatsAppLink() : '#'}
+                onClick={(e) => {
+                  if (!validateForm()) {
+                    e.preventDefault();
+                    return;
+                  }
+                  e.preventDefault();
+                  handleWhatsAppSubmit(e);
+                }}
+                className={`whatsapp-btn ${bookingStatus.type === 'checking' ? 'disabled' : ''}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i className="fab fa-whatsapp"></i> {t.whatsappButton}
+              </a>
+            </div>
+
             </form>
           </div>
         </div>
