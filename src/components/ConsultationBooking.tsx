@@ -384,7 +384,7 @@ const processBooking = async () => {
   const endDateTime = new Date(startDateTime.getTime() + 60 * 60 * 1000);
   
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbwGx9O0GgxeU6UdHmxumeKkCK6zTSfTNcES4WRyAht-fIlOuSGA77sFTKEjeo_71cDmrg/exec', {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbys_x6dN-3o37HXTaVoGr_8HVi2uVcQy9xJ9xZ24tGyRJuRtXcdgnGi-EN3Bmub9kniAA/exec', {
       method: 'POST',
       body: JSON.stringify({
         title: `موعد استشارة - ${formData.name}`,
