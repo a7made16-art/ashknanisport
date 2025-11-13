@@ -404,10 +404,8 @@ const processBooking = async () => {
       // محاولة فتح الواتساب بطرق مختلفة للتوافق مع iPhone
       try {
         // الطريقة الأولى: استخدام window.location.href (الأفضل لـ iPhone)
-        window.location.href = link;
+       // window.location.href = link;
         
-        // الطريقة الاحتياطية: إذا لم يفتح خلال 500ms
-        setTimeout(() => {
           // إنشاء رابط وهمي والنقر عليه
           const a = document.createElement('a');
           a.href = link;
@@ -416,7 +414,6 @@ const processBooking = async () => {
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
-        }, 500);
       } catch (error) {
         console.error('Failed to open WhatsApp:', error);
         // الحل الأخير: توجيه المستخدم يدوياً
