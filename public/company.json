@@ -135,6 +135,13 @@
           "videoUrl": ""
         },
         {
+          "icon": "FaHandshake",
+          "title": "Health Insurance & Rehabilitation",
+          "description": "Annual insurance providing free medical treatment and physical conditioning for our athletes.",
+          "videoUrl": "",
+          "fullDescription": "Comprehensive medical insurance and physical conditioning program.\n\nMain Packages:\n- Gold: Free consultation, treatment, recovery, and dry needling (National Team players).\n- Silver: Free consultation + 40% discount on sessions and packages.\n- Bronze: Free consultation + 30% discount on sessions and packages.\n\nPlayer Commitments: Media coverage and cooperation with training/recovery filming."
+        },
+        {
           "icon": "FaCamera",
           "title": " coming soon ",
           "description": "Live, individual, and team photography services for all sports (using advanced AI photography technology).",
@@ -1020,6 +1027,13 @@
           "title": "التدريب الشخصي",
           "description": "برامج تدريب مخصصة للوصول إلى لياقة بدنية عالية.",
           "videoUrl": ""
+        },
+        {
+          "icon": "FaHandshake",
+          "title": "تأمين صحي وتقوية سنوي",
+          "description": "تأمين سنوي يشمل العلاج الطبيعي والتأهيل البدني المجاني للرياضيين التابعين للشركة.",
+          "videoUrl": "",
+          "fullDescription": "برنامج التأمين الصحي الشامل والتأهيل البدني.\n\nأبرز الباقات:\n- الذهبية: استشارة، علاج، ريكفري، وإبر جافة (مجاناً) للاعبي المنتخب.\n- الفضية: استشارة مجانية + خصم 40% على الجلسات والباكجات.\n- البرونزية: استشارة مجانية + خصم 30% على الجلسات والباكجات.\n\nالتزامات اللاعب: التغطية الإعلامية والتعاون في تصوير الجلسات التأهيلية."
         },
         {
           "icon": "FaCamera",
