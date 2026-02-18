@@ -9,8 +9,7 @@
                 "gallery": "Gallery",
                 "documents": "Documents",
                 "contact": "Contact",
-                "playerSigning": "Player Signing" 
-
+                "playerSigning": "Player Signing"
             },
             "lang_toggle": "العربية"
         },
@@ -39,73 +38,135 @@
                 ]
             }
         },
-            "agentBenefits": {
+        "agentBenefits": {
             "title": "Why Choose a",
             "highlight": "Player Agent?",
             "description": "A professional player agent is crucial for maximizing your career potential and ensuring your rights are protected throughout your professional journey.",
             "benefits": [
                 {
-                "icon": "FaHandshake",
-                "title": "Expert Negotiation",
-                "description": "We secure the best contracts and terms that match your talent and potential."
+                    "icon": "FaHandshake",
+                    "title": "Expert Negotiation",
+                    "description": "We secure the best contracts and terms that match your talent and potential."
                 },
                 {
-                "icon": "FaShieldAlt",
-                "title": "Legal Protection",
-                "description": "Comprehensive legal support to protect your rights and interests in all contracts."
+                    "icon": "FaShieldAlt",
+                    "title": "Legal Protection",
+                    "description": "Comprehensive legal support to protect your rights and interests in all contracts."
                 },
                 {
-                "icon": "FaChartLine",
-                "title": "Career Planning",
-                "description": "Strategic career development and planning for long-term success."
+                    "icon": "FaChartLine",
+                    "title": "Career Planning",
+                    "description": "Strategic career development and planning for long-term success."
                 },
                 {
-                "icon": "FaGlobe",
-                "title": "Global Network",
-                "description": "Access to international clubs, scouts, and opportunities worldwide."
+                    "icon": "FaGlobe",
+                    "title": "Global Network",
+                    "description": "Access to international clubs, scouts, and opportunities worldwide."
                 },
                 {
-                "icon": "FaMoneyBillWave",
-                "title": "Financial Management",
-                "description": "Expert financial advice and management for your earnings and investments."
+                    "icon": "FaMoneyBillWave",
+                    "title": "Financial Management",
+                    "description": "Expert financial advice and management for your earnings and investments."
                 },
                 {
-                "icon": "FaUserFriends",
-                "title": "Personal Support",
-                "description": "Dedicated support and guidance throughout your career journey."
+                    "icon": "FaUserFriends",
+                    "title": "Personal Support",
+                    "description": "Dedicated support and guidance throughout your career journey."
                 }
             ]
-            },
+        },
         "services": {
             "title_part1": "Our",
             "title_part2": "Services",
             "list": [
-                { "icon": "FaFutbol", "title": "Athlete Management", "description": "Comprehensive management for athletes, both on and off the field." },
-                { "icon": "FaBullhorn", "title": "Media & Public Relations", "description": "Enhancing public image and media presence for maximum exposure." },
-                { "icon": "FaHandshake", "title": "Sponsorships & Academies", "description": "Connecting athletes with leading sponsors and academies." },
-                { "icon": "FaAppleAlt", "title": "Nutrition Consultations", "description": "Expert nutritional guidance for peak physical performance." },
-                { "icon": "FaGavel", "title": "Legal & Contract Reading", "description": "Professional legal advice and meticulous contract reviews." },
-                { "icon": "FaGlobe", "title": "Local & International Marketing", "description": "Strategic marketing campaigns to build global athlete brands." },
-                { "icon": "FaBrain", "title": "Mental Motivation", "description": "Coaching to build mental toughness and focus." },
-                { "icon": "FaDumbbell", "title": "Personal Training", "description": "Customized training programs for elite conditioning." }
+                {
+                    "icon": "FaFutbol",
+                    "title": "Athlete Management",
+                    "description": "Comprehensive management for athletes, both on and off the field."
+                },
+                {
+                    "icon": "FaBullhorn",
+                    "title": "Media & Public Relations",
+                    "description": "Enhancing public image and media presence for maximum exposure."
+                },
+                {
+                    "icon": "FaHandshake",
+                    "title": "Sponsorships & Academies",
+                    "description": "Connecting athletes with leading sponsors and academies."
+                },
+                {
+                    "icon": "FaAppleAlt",
+                    "title": "Nutrition Consultations",
+                    "description": "Expert nutritional guidance for peak physical performance."
+                },
+                {
+                    "icon": "FaGavel",
+                    "title": "Legal & Contract Reading",
+                    "description": "Professional legal advice and meticulous contract reviews."
+                },
+                {
+                    "icon": "FaGlobe",
+                    "title": "Local & International Marketing",
+                    "description": "Strategic marketing campaigns to build global athlete brands."
+                },
+                {
+                    "icon": "FaBrain",
+                    "title": "Mental Motivation",
+                    "description": "Coaching to build mental toughness and focus."
+                },
+                {
+                    "icon": "FaDumbbell",
+                    "title": "Personal Training",
+                    "description": "Customized training programs for elite conditioning."
+                },
+                {
+                    "icon": "FaHandshake",
+                    "title": "Toscana Clinic Cooperation",
+                    "description": "Exclusive medical sponsorship and rehabilitation services for our athletes.",
+                    "fullDescription": "Cooperation Agreement\n\nDate: 14 / 2 / 2026\n\nBetween:\n1. Toscana Clinic for Physical Therapy and Rehabilitation (Represented by: Mr. Faisal Jawad Hashem)\n2. Ashkanani Sport Office (Represented by: Mr. Ahmed Jaber Ashkanani)\n\nGoal: Providing physical therapy and rehabilitation for the company's players in exchange for media and marketing cooperation.\n\nTreatment Packages:\n\n1. Gold Package (National Team & First Division Players Only):\n- Free physical therapy consultation (Unlimited)\n- Free injury treatment and rehabilitation\n- Monthly package: 6 sessions/month (Free, then 50% discount after 6 sessions)\n- Recovery sessions (3/month, Free)\n- Dry needling (2/month, Free)\n\n2. Silver Package:\n- Free physical therapy consultation\n- 40% discount on individual sessions (21 KWD instead of 35)\n- 6-session package: 126 KWD (instead of 210)\n- Recovery session: 15 KWD\n- Dry needling: 21 KWD\n\n3. Bronze Package:\n- Free physical therapy consultation\n- 30% discount on individual sessions (24.500 KWD)\n- 6-session package: 147 KWD\n- Recovery session: 17.500 KWD\n- Dry needling: 24.500 KWD\n\nPlayer Obligations:\n- Cooperate in filming inside the clinic.\n- Post clinic content (Story or Reels) upon request.\n- Cover treatment with at least 5 Instagram stories per session with clinic mention.\n- Gold package players list Toscana Clinic as a medical sponsor in their Bio."
+                }
             ]
         },
         "achievements": {
             "title_part1": "Awards &",
             "title_part2": "Achievements",
             "list": [
-                { "icon": "FaTrophy", "title": "Best Player U18", "description": "Awarded to our client Ahmed Al-Ajmi from Al-Qadisiyah Club." },
-                { "icon": "FaAward", "title": "Best Coach U16", "description": "Honoring Coach Ahmed Abdulrahman Al-Houti for an outstanding season." },
-                { "icon": "FaStar", "title": "Rising Star Award", "description": "Recognizing the exceptional potential of our managed young talents." }
+                {
+                    "icon": "FaTrophy",
+                    "title": "Best Player U18",
+                    "description": "Awarded to our client Ahmed Al-Ajmi from Al-Qadisiyah Club."
+                },
+                {
+                    "icon": "FaAward",
+                    "title": "Best Coach U16",
+                    "description": "Honoring Coach Ahmed Abdulrahman Al-Houti for an outstanding season."
+                },
+                {
+                    "icon": "FaStar",
+                    "title": "Rising Star Award",
+                    "description": "Recognizing the exceptional potential of our managed young talents."
+                }
             ]
         },
         "deals": {
             "title_part1": "Contracts &",
             "title_part2": "Deals",
             "list": [
-                { "img": "/images/deal1.jpg", "title": "Omar AlShaya", "description": "Successfully transferred to Al-Nasr Kuwaiti Club." },
-                { "img": "/images/deal2.jpg", "title": "saleh AlMahri", "description": "Successfully transferred to Jeddah Saudi Club." },
-                { "img": "/images/deal3.jpg", "title": "Hani ALSaqr", "description": "Captain Hani Al-Saqr is the coach and technical advisor of the Moroccan Olympique Dcheira club." }
+                {
+                    "img": "/images/deal1.jpg",
+                    "title": "Omar AlShaya",
+                    "description": "Successfully transferred to Al-Nasr Kuwaiti Club."
+                },
+                {
+                    "img": "/images/deal2.jpg",
+                    "title": "saleh AlMahri",
+                    "description": "Successfully transferred to Jeddah Saudi Club."
+                },
+                {
+                    "img": "/images/deal3.jpg",
+                    "title": "Hani ALSaqr",
+                    "description": "Captain Hani Al-Saqr is the coach and technical advisor of the Moroccan Olympique Dcheira club."
+                }
             ]
         },
         "gallery": {
@@ -116,17 +177,42 @@
                 "videos": "Videos"
             },
             "photos": [
-                { "title": "Player Deals", "src": "/images/player1.jpg" },
-                { "title": "Player Deals", "src": "/images/player2.jpg" },
-                { "title": "Player Deals", "src": "/images/player3.jpg" },
-                { "title": "Player Deals", "src": "/images/player4.jpg" },
-                { "title": "Player Deals", "src": "/images/player5.jpg" },
-                { "title": "Player Deals", "src": "/images/player6.jpg" }
+                {
+                    "title": "Player Deals",
+                    "src": "/images/player1.jpg"
+                },
+                {
+                    "title": "Player Deals",
+                    "src": "/images/player2.jpg"
+                },
+                {
+                    "title": "Player Deals",
+                    "src": "/images/player3.jpg"
+                },
+                {
+                    "title": "Player Deals",
+                    "src": "/images/player4.jpg"
+                },
+                {
+                    "title": "Player Deals",
+                    "src": "/images/player5.jpg"
+                },
+                {
+                    "title": "Player Deals",
+                    "src": "/images/player6.jpg"
+                }
             ],
             "videos": [
-            { "title": "Goin Us", "src": "/videos/video1.mp4" ,"thumbnail": "/images/thumb1.png"},
-            { "title": "What is the benefit of a players agent?", "src": "/videos/video2.mp4" ,"thumbnail": "/images/thumb2.png"}
-
+                {
+                    "title": "Goin Us",
+                    "src": "/videos/video1.mp4",
+                    "thumbnail": "/images/thumb1.png"
+                },
+                {
+                    "title": "What is the benefit of a players agent?",
+                    "src": "/videos/video2.mp4",
+                    "thumbnail": "/images/thumb2.png"
+                }
             ]
         },
         "playerSigning": {
@@ -214,19 +300,27 @@
             }
         },
         "transferMarket": {
-                    "title": "Find Us on",
-                    "highlight": "TransferMarket",
-                    "description": "Visit our official TransferMarket profile to stay updated with our latest player transfers, market values, and industry insights.",
-                    "logoUrl": "/images/transfermarket-logo.png",
-                    "profileUrl": "https://www.transfermarkt.com/ashkanani-sport/startseite/agent/384",
-                    "buttonText": "Visit Our Profile"
-                    },
+            "title": "Find Us on",
+            "highlight": "TransferMarket",
+            "description": "Visit our official TransferMarket profile to stay updated with our latest player transfers, market values, and industry insights.",
+            "logoUrl": "/images/transfermarket-logo.png",
+            "profileUrl": "https://www.transfermarkt.com/ashkanani-sport/startseite/agent/384",
+            "buttonText": "Visit Our Profile"
+        },
         "documents": {
             "title_part1": "Official",
             "title_part2": "Documents",
             "list": [
-                { "icon": "FaFilePdf", "title": "Company Portfolio 2025", "fileUrl": "#" },
-                { "icon": "FaFileAlt", "title": "Founder's CV", "fileUrl": "#" }
+                {
+                    "icon": "FaFilePdf",
+                    "title": "Company Portfolio 2025",
+                    "fileUrl": "#"
+                },
+                {
+                    "icon": "FaFileAlt",
+                    "title": "Founder's CV",
+                    "fileUrl": "#"
+                }
             ]
         },
         "contact": {
@@ -260,104 +354,164 @@
                 "gallery": "المعرض",
                 "documents": "المستندات",
                 "contact": "اتصل بنا",
-                "playerSigning": "توقيع اللاعبين" 
-
+                "playerSigning": "توقيع اللاعبين"
             },
             "lang_toggle": "English"
         },
-            "hero": {
-                "title": "أشكناني سبورت",
-                "tagline": "الشركة الرائدة في إدارة الرياضيين في الكويت. نسعى لتطوير الرياضة بمختلف أشكالها!",
-                "cta1": "اتصل بنا",
-                "cta2": "اعرف المزيد"
-            },
-            "about": {
-                "title_part1": "نبذة عن",
-                "title_part2": "الشركة",
-                "p1": "تم تأسيس شركة أشكناني سبورت في سنة ٢٠١٩م من وزارة العدل والتجارة في دولة الكويت.",
-                "p2": "كأول شركة تقوم بإدارة أعمال الرياضيين من لاعبين ومدربين وإداريين بجميع الرياضات، كنا روادًا في الإدارة الرياضية الاحترافية في المنطقة.",
-                "p3": "اليوم، شركة أشكناني سبورت هي الشركة الرائدة في مجال التسويق والإدارة الرياضية في دولة الكويت، ونسعى دائمًا للأفضل.",
-                "founder": {
-                    "name": "كابتن أحمد جابر أشكناني",
-                    "role": "وكيل أعمال لاعبين ومدربين معتمد من FIFA",
-                    "photo": "/images/myphoto.jpg",
-                    "credentials": [
-                        "مدير سابق للمراحل السنية بمنتخب الكويت ونادي العربي الكويتي (7 سنوات).",
-                        "مدير الفرق الأولى للمنتخبات الكويتية.",
-                        "مدير الألعاب الرياضية بالاتحاد الكويتي المدرسي والتعليم العالي.",
-                        "محاضر دولي معتمد من البيتا الأوروبي والبورد الأمريكي.",
-                        "معتمد من الهيئة العامة للتعليم التطبيقي و FIFA."
-                    ]
-                }
-            },
-            "agentBenefits": {
-        "title": "لماذا تختار",
-        "highlight": "وكيل لاعبين؟",
-        "description": "وكيل اللاعبين المحترف ضروري لتعظيم إمكانياتك المهنية وضمان حماية حقوقك طوال رحلتك الاحترافية.",
-        "benefits": [
-            {
-            "icon": "FaHandshake",
-            "title": "تفاوض احترافي",
-            "description": "نؤمن أفضل العقود والشروط التي تتوافق مع موهبتك وإمكانياتك."
-            },
-            {
-            "icon": "FaShieldAlt",
-            "title": "الحماية القانونية",
-            "description": "دعم قانوني شامل لحماية حقوقك ومصالحك في جميع العقود."
-            },
-            {
-            "icon": "FaChartLine",
-            "title": "تخطيط المسيرة",
-            "description": "تطوير وتخطيط استراتيجي للمسيرة المهنية لضمان النجاح طويل الأمد."
-            },
-            {
-            "icon": "FaGlobe",
-            "title": "شبكة عالمية",
-            "description": "الوصول إلى الأندية الدولية والكشافين والفرص حول العالم."
-            },
-            {
-            "icon": "FaMoneyBillWave",
-            "title": "الإدارة المالية",
-            "description": "استشارات مالية وإدارة احترافية لأرباحك واستثماراتك."
-            },
-            {
-            "icon": "FaUserFriends",
-            "title": "دعم شخصي",
-            "description": "دعم وإرشاد مخصص طوال رحلتك المهنية."
+        "hero": {
+            "title": "أشكناني سبورت",
+            "tagline": "الشركة الرائدة في إدارة الرياضيين في الكويت. نسعى لتطوير الرياضة بمختلف أشكالها!",
+            "cta1": "اتصل بنا",
+            "cta2": "اعرف المزيد"
+        },
+        "about": {
+            "title_part1": "نبذة عن",
+            "title_part2": "الشركة",
+            "p1": "تم تأسيس شركة أشكناني سبورت في سنة ٢٠١٩م من وزارة العدل والتجارة في دولة الكويت.",
+            "p2": "كأول شركة تقوم بإدارة أعمال الرياضيين من لاعبين ومدربين وإداريين بجميع الرياضات، كنا روادًا في الإدارة الرياضية الاحترافية في المنطقة.",
+            "p3": "اليوم، شركة أشكناني سبورت هي الشركة الرائدة في مجال التسويق والإدارة الرياضية في دولة الكويت، ونسعى دائمًا للأفضل.",
+            "founder": {
+                "name": "كابتن أحمد جابر أشكناني",
+                "role": "وكيل أعمال لاعبين ومدربين معتمد من FIFA",
+                "photo": "/images/myphoto.jpg",
+                "credentials": [
+                    "مدير سابق للمراحل السنية بمنتخب الكويت ونادي العربي الكويتي (7 سنوات).",
+                    "مدير الفرق الأولى للمنتخبات الكويتية.",
+                    "مدير الألعاب الرياضية بالاتحاد الكويتي المدرسي والتعليم العالي.",
+                    "محاضر دولي معتمد من البيتا الأوروبي والبورد الأمريكي.",
+                    "معتمد من الهيئة العامة للتعليم التطبيقي و FIFA."
+                ]
             }
-        ]
+        },
+        "agentBenefits": {
+            "title": "لماذا تختار",
+            "highlight": "وكيل لاعبين؟",
+            "description": "وكيل اللاعبين المحترف ضروري لتعظيم إمكانياتك المهنية وضمان حماية حقوقك طوال رحلتك الاحترافية.",
+            "benefits": [
+                {
+                    "icon": "FaHandshake",
+                    "title": "تفاوض احترافي",
+                    "description": "نؤمن أفضل العقود والشروط التي تتوافق مع موهبتك وإمكانياتك."
+                },
+                {
+                    "icon": "FaShieldAlt",
+                    "title": "الحماية القانونية",
+                    "description": "دعم قانوني شامل لحماية حقوقك ومصالحك في جميع العقود."
+                },
+                {
+                    "icon": "FaChartLine",
+                    "title": "تخطيط المسيرة",
+                    "description": "تطوير وتخطيط استراتيجي للمسيرة المهنية لضمان النجاح طويل الأمد."
+                },
+                {
+                    "icon": "FaGlobe",
+                    "title": "شبكة عالمية",
+                    "description": "الوصول إلى الأندية الدولية والكشافين والفرص حول العالم."
+                },
+                {
+                    "icon": "FaMoneyBillWave",
+                    "title": "الإدارة المالية",
+                    "description": "استشارات مالية وإدارة احترافية لأرباحك واستثماراتك."
+                },
+                {
+                    "icon": "FaUserFriends",
+                    "title": "دعم شخصي",
+                    "description": "دعم وإرشاد مخصص طوال رحلتك المهنية."
+                }
+            ]
         },
         "services": {
             "title_part1": "خدمات",
             "title_part2": "الشركة",
             "list": [
-                { "icon": "FaFutbol", "title": "إدارة الرياضيين", "description": "إدارة شاملة للرياضيين داخل وخارج الملعب." },
-                { "icon": "FaBullhorn", "title": "الإعلام والعلاقات العامة", "description": "تحسين الصورة العامة والحضور الإعلامي لتحقيق أقصى انتشار." },
-                { "icon": "FaHandshake", "title": "الرعاية والأكاديميات", "description": "ربط الرياضيين بالرعاة والأكاديميات الرائدة." },
-                { "icon": "FaAppleAlt", "title": "استشارات التغذية", "description": "إرشادات غذائية متخصصة لتحقيق أفضل أداء بدني." },
-                { "icon": "FaGavel", "title": "الاستشارات القانونية وقراءة العقود", "description": "استشارات قانونية احترافية ومراجعة دقيقة للعقود." },
-                { "icon": "FaGlobe", "title": "التسويق المحلي والدولي", "description": "حملات تسويقية استراتيجية لبناء علامات تجارية عالمية للرياضيين." },
-                { "icon": "FaBrain", "title": "التحفيز الذهني", "description": "تدريب لبناء الصلابة الذهنية والتركيز." },
-                { "icon": "FaDumbbell", "title": "التدريب الشخصي", "description": "برامج تدريب مخصصة للوصول إلى لياقة بدنية عالية." }
+                {
+                    "icon": "FaFutbol",
+                    "title": "إدارة الرياضيين",
+                    "description": "إدارة شاملة للرياضيين داخل وخارج الملعب."
+                },
+                {
+                    "icon": "FaBullhorn",
+                    "title": "الإعلام والعلاقات العامة",
+                    "description": "تحسين الصورة العامة والحضور الإعلامي لتحقيق أقصى انتشار."
+                },
+                {
+                    "icon": "FaHandshake",
+                    "title": "الرعاية والأكاديميات",
+                    "description": "ربط الرياضيين بالرعاة والأكاديميات الرائدة."
+                },
+                {
+                    "icon": "FaAppleAlt",
+                    "title": "استشارات التغذية",
+                    "description": "إرشادات غذائية متخصصة لتحقيق أفضل أداء بدني."
+                },
+                {
+                    "icon": "FaGavel",
+                    "title": "الاستشارات القانونية وقراءة العقود",
+                    "description": "استشارات قانونية احترافية ومراجعة دقيقة للعقود."
+                },
+                {
+                    "icon": "FaGlobe",
+                    "title": "التسويق المحلي والدولي",
+                    "description": "حملات تسويقية استراتيجية لبناء علامات تجارية عالمية للرياضيين."
+                },
+                {
+                    "icon": "FaBrain",
+                    "title": "التحفيز الذهني",
+                    "description": "تدريب لبناء الصلابة الذهنية والتركيز."
+                },
+                {
+                    "icon": "FaDumbbell",
+                    "title": "التدريب الشخصي",
+                    "description": "برامج تدريب مخصصة للوصول إلى لياقة بدنية عالية."
+                },
+                {
+                    "icon": "FaHandshake",
+                    "title": "اتفاقية تعاون عيادة توسكانا",
+                    "description": "رعاية طبية حصرية وخدمات تأهيل متطورة للاعبينا.",
+                    "fullDescription": "اتفاقية تعاون\n\n📅 14 / 2 / 2026\n\nبين:\n1. عيادة توسكانا للعلاج الطبيعي والتأهيل (ويمثلها: السيد/ فيصل جواد هاشم)\n2. شركة مكتب أشكناني سبورت (ويمثلها: السيد/ أحمد جابر أشكناني)\n\nالهدف: تقديم رعاية علاج طبيعي وتأهيل للاعبين التابعين للشركة، مقابل تعاون إعلامي وتسويقي يخدم الطرفين.\n\nالباقات العلاجية:\n\n1. الباقة الذهبية (للاعبي المنتخب ولاعبي الدرجة الأولى فقط):\n- استشارة علاج طبيعي مجانية (عدد مفتوح)\n- علاج وتأهيل الإصابات مجاناً\n- باكج 6 جلسات بالشهر (مجاناً، وبعد 6 جلسات خصم 50%)\n- جلسة ريكفري (3 جلسات بالشهر، مجاناً)\n- جلسة الإبر الجافة (جلستين بالشهر، مجاناً)\n\n2. الباقة الفضية:\n- استشارة علاج طبيعي مجانية\n- خصم 40% على جلسات العلاج والتأهيل (21 د.ك بدلاً من 35)\n- باكج 6 جلسات: 126 د.ك (بدلاً من 210)\n- جلسة ريكفري: 15 د.ك\n- الإبر الجافة: 21 د.ك\n\n3. الباقة البرونزية:\n- استشارة علاج طبيعي مجانية\n- خصم 30% على جلسات العلاج والتأهيل (24.500 د.ك)\n- باكج 6 جلسات: 147 د.ك\n- جلسة ريكفري: 17.500 د.ك\n- الإبر الجافة: 24.500 د.ك\n\nالتزامات اللاعبين والطرف الثاني:\n- التعاون في التصوير داخل العيادة عند الطلب.\n- نشر محتوى العيادة (ستوري أو ريلز إنستغرام) عند الطلب.\n- تغطية العلاج بستوري إنستغرام خلال فترة العلاج (على الأقل 5 ستوري لكل جلسة مع منشن للعيادة).\n- لاعبو الباقة الذهبية يضعون اسم عيادة توسكانا كراعٍ طبي في البايو طوال فترة العلاج."
+                }
             ]
         },
         "achievements": {
             "title_part1": "الجوائز",
             "title_part2": "والإنجازات",
             "list": [
-                { "icon": "FaTrophy", "title": "أفضل لاعب تحت 18 سنة", "description": "مُنحت لعميلنا أحمد العجمي من نادي القادسية." },
-                { "icon": "FaAward", "title": "أفضل مدرب تحت 16 سنة", "description": "تكريمًا للمدرب أحمد عبدالرحمن الحوطي لموسمه المتميز." },
-                { "icon": "FaStar", "title": "جائزة النجم الصاعد", "description": "تقديرًا للمواهب الشابة الواعدة التي نديرها." }
+                {
+                    "icon": "FaTrophy",
+                    "title": "أفضل لاعب تحت 18 سنة",
+                    "description": "مُنحت لعميلنا أحمد العجمي من نادي القادسية."
+                },
+                {
+                    "icon": "FaAward",
+                    "title": "أفضل مدرب تحت 16 سنة",
+                    "description": "تكريمًا للمدرب أحمد عبدالرحمن الحوطي لموسمه المتميز."
+                },
+                {
+                    "icon": "FaStar",
+                    "title": "جائزة النجم الصاعد",
+                    "description": "تقديرًا للمواهب الشابة الواعدة التي نديرها."
+                }
             ]
         },
         "deals": {
             "title_part1": "العقود",
             "title_part2": "والصفقات",
             "list": [
-                { "img": "/images/deal1.jpg", "title": "عمر الشايع", "description": "عمر الشايع الى نادي النصر الكويتي لمده موسم." },
-                { "img": "/images/deal2.jpg", "title": "صالح عقيل", "description": "صالح عقيل الى نادي جدة السعودي" },
-                { "img": "/images/deal3.jpg", "title": "هاني الصقر", "description": " الكابتن هاني الصقر مدرباً و مستشار فني لنادي اولمبيك الدشيرة المغربي." }
-                           
+                {
+                    "img": "/images/deal1.jpg",
+                    "title": "عمر الشايع",
+                    "description": "عمر الشايع الى نادي النصر الكويتي لمده موسم."
+                },
+                {
+                    "img": "/images/deal2.jpg",
+                    "title": "صالح عقيل",
+                    "description": "صالح عقيل الى نادي جدة السعودي"
+                },
+                {
+                    "img": "/images/deal3.jpg",
+                    "title": "هاني الصقر",
+                    "description": " الكابتن هاني الصقر مدرباً و مستشار فني لنادي اولمبيك الدشيرة المغربي."
+                }
             ]
         },
         "gallery": {
@@ -368,18 +522,42 @@
                 "videos": "الفيديو"
             },
             "photos": [
-                { "title": "صفقات اللاعبين", "src": "/images/player1.jpg" },
-                { "title": "صفقات اللاعبين", "src": "/images/player2.jpg" },
-                { "title": "صفقات اللاعبين", "src": "/images/player3.jpg" },
-                { "title": "صفقات اللاعبين", "src": "/images/player4.jpg" },
-                { "title": "صفقات اللاعبين", "src": "/images/player5.jpg" },
-                { "title": "صفقات اللاعبين", "src": "/images/player6.jpg" }
-
+                {
+                    "title": "صفقات اللاعبين",
+                    "src": "/images/player1.jpg"
+                },
+                {
+                    "title": "صفقات اللاعبين",
+                    "src": "/images/player2.jpg"
+                },
+                {
+                    "title": "صفقات اللاعبين",
+                    "src": "/images/player3.jpg"
+                },
+                {
+                    "title": "صفقات اللاعبين",
+                    "src": "/images/player4.jpg"
+                },
+                {
+                    "title": "صفقات اللاعبين",
+                    "src": "/images/player5.jpg"
+                },
+                {
+                    "title": "صفقات اللاعبين",
+                    "src": "/images/player6.jpg"
+                }
             ],
             "videos": [
-                 { "title": "سارع بالانضمام", "src": "/videos/video1.mp4" ,"thumbnail": "/images/thumb1.png"},
-                { "title": "ما فائدة وكيل اللاعبين ؟", "src": "/videos/video2.mp4" ,"thumbnail": "/images/thumb2.png"}
-
+                {
+                    "title": "سارع بالانضمام",
+                    "src": "/videos/video1.mp4",
+                    "thumbnail": "/images/thumb1.png"
+                },
+                {
+                    "title": "ما فائدة وكيل اللاعبين ؟",
+                    "src": "/videos/video2.mp4",
+                    "thumbnail": "/images/thumb2.png"
+                }
             ]
         },
         "playerSigning": {
@@ -473,13 +651,21 @@
             "logoUrl": "/images/transfermarket-logo.png",
             "profileUrl": "https://www.transfermarkt.com/ashkanani-sport/startseite/agent/384",
             "buttonText": "زر ملفنا الرسمي"
-            },
-            "documents": {
+        },
+        "documents": {
             "title_part1": "مستندات",
             "title_part2": "رسمية",
             "list": [
-                { "icon": "FaFilePdf", "title": "ملف الشركة التعريفي 2025", "fileUrl": "#" },
-                { "icon": "FaFileAlt", "title": "السيرة الذاتية للمؤسس", "fileUrl": "#" }
+                {
+                    "icon": "FaFilePdf",
+                    "title": "ملف الشركة التعريفي 2025",
+                    "fileUrl": "#"
+                },
+                {
+                    "icon": "FaFileAlt",
+                    "title": "السيرة الذاتية للمؤسس",
+                    "fileUrl": "#"
+                }
             ]
         },
         "contact": {

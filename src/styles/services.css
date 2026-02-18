@@ -375,7 +375,14 @@
     padding: 20px;
     border-radius: 8px;
     margin-top: 20px;
+    text-align: right;
+    white-space: pre-wrap;
+    direction: rtl;
+}
+
+[lang="en"] .services-modal-additional-details {
     text-align: left;
+    direction: ltr;
 }
 
 /* للشاشات الصغيرة */
