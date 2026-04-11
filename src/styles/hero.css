@@ -63,9 +63,39 @@
     animation-fill-mode: backwards;
 }
 
-/* إزالة تنسيقات الأزرار */
+/* إزالة تنسيقات الأزرار القديمة */
 .hero-cta {
-    display: none; /* إخفاء حاوية الأزرار بالكامل */
+    display: none;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    animation: fadeInUp 1s ease-out 0.8s;
+    animation-fill-mode: backwards;
+}
+
+.hero-transfer-btn {
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
+    color: var(--bg-color);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+    display: inline-flex;
+    align-items: center;
+    border: none;
+}
+
+.hero-transfer-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(212, 175, 55, 0.6);
+    filter: brightness(1.1);
 }
 
 /* تحسينات للشاشات الصغيرة */

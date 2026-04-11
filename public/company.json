@@ -13,6 +13,7 @@
         "agentBenefits": "Why Agent",
         "AshknaniChampionship": "Ashknani Championship"
       },
+      "transferButton": "Ashkanani Transfer",
       "lang_toggle": "العربية"
     },
     "hero": {
@@ -20,6 +21,7 @@
       "tagline": "Leading Athlete Management.",
       "cta1": "Contact Us",
       "cta2": "Learn More",
+      "transferButton": "Visit Ashkanani Transfer",
       "sliderImages": [
         {
           "url": "images/slider1.png",
@@ -907,6 +909,7 @@
         "agentBenefits": "فائدة وكيل اللاعبين",
         "AshknaniChampionship": "بطولة أشكناني"
       },
+      "transferButton": "أشكناني ترانسفير",
       "lang_toggle": "English"
     },
     "hero": {
@@ -914,6 +917,7 @@
       "tagline": "الشركة الرائدة في إدارة الرياضيين",
       "cta1": "اتصل بنا",
       "cta2": "اعرف المزيد",
+      "transferButton": "زيارة أشكناني ترانسفير",
       "sliderImages": [
         {
           "url": "images/slider1.png",

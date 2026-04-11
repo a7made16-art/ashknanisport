@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-const Hero = ({ content }) => {
+import { HeroContent } from '../types';
+
+const Hero: React.FC<{ content: HeroContent }> = ({ content }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     
     // التمرير التلقائي للسلايدر
@@ -44,6 +46,16 @@ const Hero = ({ content }) => {
                     <img src="/images/logo.png" alt="Ashkanani Sport Marketing Logo" loading="lazy"/>
                 </h1>
                 <p className="hero-tagline">{content.tagline}</p>
+                <div className="hero-actions">
+                    <a 
+                        href="https://ashkananitransfer.com/" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="hero-transfer-btn"
+                    >
+                        {content.transferButton}
+                    </a>
+                </div>
             </div>
         </section>
     );

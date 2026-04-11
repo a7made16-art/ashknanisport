@@ -14,6 +14,7 @@ export interface NavItem {
 
 export interface HeaderContent {
   nav: NavItem;
+  transferButton: string;
   lang_toggle: string;
 }
 
@@ -22,6 +23,8 @@ export interface HeroContent {
   tagline: string;
   cta1: string;
   cta2: string;
+  transferButton: string;
+  sliderImages: { url: string; alt: string }[];
 }
 
 export interface Founder {

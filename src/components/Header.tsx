@@ -15,6 +15,7 @@ interface HeaderProps {
             playerSigning: string;
             AshknaniChampionship:string;
         };
+        transferButton: string;
         lang_toggle: string;
     };
     language: 'en' | 'ar';
@@ -196,8 +197,17 @@ const Header: React.FC<HeaderProps> = ({ content, language, toggleLanguage }) =>
 
                         </ul>
                         
+                        <a 
+                            href="https://ashkananitransfer.com/" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="transfer-btn"
+                        >
+                            {content.transferButton}
+                        </a>
+
                         <button onClick={() => { toggleLanguage(); closeMenu(); }} className="lang-switcher">
-                            {content.lang_toggle}
+                            {language === 'en' ? 'ع' : 'EN'}
                         </button>
                     </div>
                 </div>

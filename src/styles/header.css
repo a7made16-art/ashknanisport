@@ -100,6 +100,7 @@ body[dir="rtl"] .nav-logo {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 600;
+    font-size: 0.9rem;
     position: relative;
     padding-bottom: 5px;
 }
@@ -123,19 +124,52 @@ body[dir="rtl"] .nav-links a::after {
     background: none;
     border: 1px solid var(--accent-color);
     color: var(--accent-color);
-    padding: 0.5rem 1rem;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: 600;
-    margin-left: 1rem;
-    transition: background-color 0.3s, color 0.3s;
-    white-space: nowrap;
+    font-weight: 700;
+    margin-left: 0.8rem;
+    transition: all 0.3s ease;
 }
 .lang-switcher:hover {
     background-color: var(--accent-color);
     color: var(--bg-color);
+    transform: scale(1.05);
 }
 body[dir="rtl"] .lang-switcher {
+    margin-left: 0;
+    margin-right: 1rem;
+}
+
+.transfer-btn {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--accent-color);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+}
+
+.transfer-btn:hover {
+    background-color: transparent;
+    color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+body[dir="rtl"] .transfer-btn {
     margin-left: 0;
     margin-right: 1rem;
 }
