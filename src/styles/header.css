@@ -95,14 +95,15 @@ body[dir="rtl"] .nav-logo {
     flex: 1;
 }
 
-.nav-links li { margin: 0 1rem; }
+.nav-links li { margin: 0 0.6rem; }
 .nav-links a {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     position: relative;
     padding-bottom: 5px;
+    white-space: nowrap;
 }
 .nav-links a::after {
     content: '';
@@ -172,6 +173,10 @@ body[dir="rtl"] .lang-switcher {
 body[dir="rtl"] .transfer-btn {
     margin-left: 0;
     margin-right: 1rem;
+}
+
+html[lang="en"] .transfer-btn {
+    font-size: 0.75rem; /* Smaller font for longer English text */
 }
 
 /* Dropdown menu styles */
