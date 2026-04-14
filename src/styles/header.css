@@ -170,12 +170,38 @@ body[dir="rtl"] .lang-switcher {
     box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
 }
 
-body[dir="rtl"] .transfer-btn {
+.official-btn {
+    background-color: transparent;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+}
+
+.official-btn:hover {
+    background-color: white;
+    color: var(--bg-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+body[dir="rtl"] .transfer-btn,
+body[dir="rtl"] .official-btn {
     margin-left: 0;
     margin-right: 1rem;
 }
 
-html[lang="en"] .transfer-btn {
+html[lang="en"] .transfer-btn,
+html[lang="en"] .official-btn {
     font-size: 0.75rem; /* Smaller font for longer English text */
 }
 

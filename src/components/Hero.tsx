@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 import { HeroContent } from '../types';
 
-const Hero: React.FC<{ content: HeroContent }> = ({ content }) => {
+interface HeroProps {
+    content: HeroContent;
+    language: 'en' | 'ar';
+}
+
+const Hero: React.FC<HeroProps> = ({ content, language }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     
     // التمرير التلقائي للسلايدر
@@ -54,6 +59,15 @@ const Hero: React.FC<{ content: HeroContent }> = ({ content }) => {
                         className="hero-transfer-btn"
                     >
                         {content.transferButton}
+                    </a>
+                    
+                    <a 
+                        href="https://ashkananisport.com/" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="hero-official-btn"
+                    >
+                        {language === 'en' ? 'Official Website' : 'الموقع الرسمي'}
                     </a>
                 </div>
             </div>

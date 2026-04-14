@@ -98,6 +98,27 @@
     filter: brightness(1.1);
 }
 
+.hero-official-btn {
+    background: transparent;
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+    display: inline-flex;
+    align-items: center;
+}
+
+.hero-official-btn:hover {
+    background: white;
+    color: var(--bg-color);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+}
+
 /* تحسينات للشاشات الصغيرة */
 @media (max-width: 768px) {
     .hero-logo img { 

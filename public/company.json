@@ -909,7 +909,7 @@
         "agentBenefits": "فائدة وكيل اللاعبين",
         "AshknaniChampionship": "بطولة أشكناني"
       },
-      "transferButton": "أشكناني ترانسفير",
+      "transferButton": "اشكناني لسوق الانتقالات",
       "lang_toggle": "English"
     },
     "hero": {
@@ -917,7 +917,7 @@
       "tagline": "الشركة الرائدة في إدارة الرياضيين",
       "cta1": "اتصل بنا",
       "cta2": "اعرف المزيد",
-      "transferButton": "زيارة أشكناني ترانسفير",
+      "transferButton": "اشكناني لسوق الانتقالات",
       "sliderImages": [
         {
           "url": "images/slider1.png",
@@ -1303,7 +1303,7 @@
       "description": "زر ملفنا الرسمي على ترانسفير ماركت لمتابعة أحدث انتقالات لاعبينا وقيمتهم السوقية وأخبار السوق.",
       "logoUrl": "/images/transfer.png",
       "profileUrl": "https://www.transfermarkt.us/ashkanani-sport-marketing/beraterfirma/berater/13189",
-      "buttonText": "زر ملفنا الرسمي"
+      "buttonText": "اشكناني لسوق الانتقالات"
     },
     "documents": {
       "list": [

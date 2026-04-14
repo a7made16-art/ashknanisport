@@ -198,6 +198,15 @@ const Header: React.FC<HeaderProps> = ({ content, language, toggleLanguage }) =>
                         </ul>
                         
                         <a 
+                            href="https://ashkananisport.com/" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="official-btn"
+                        >
+                            {language === 'en' ? 'Official Website' : 'الموقع الرسمي'}
+                        </a>
+
+                        <a 
                             href="https://ashkananitransfer.com/" 
                             target="_blank" 
                             rel="noopener noreferrer" 

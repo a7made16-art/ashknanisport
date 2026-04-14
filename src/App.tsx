@@ -118,7 +118,7 @@ function App() {
                 toggleLanguage={toggleLanguage}
             />
             <main>
-                <Hero content={currentContent.hero} />
+                <Hero content={currentContent.hero} language={language} />
                 <About content={currentContent.about} />
                 <AgentBenefits content={currentContent.agentBenefits} />
                 <Services content={currentContent.services} language={language} /> 
