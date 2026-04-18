@@ -148,6 +148,13 @@
           "title": " coming soon ",
           "description": "Live, individual, and team photography services for all sports (using advanced AI photography technology).",
           "videoUrl": "https://res.cloudinary.com/dl5duvmve/video/upload/v1758725977/service1_ikmxlj.mov"
+        },
+        {
+          "icon": "FaVideo",
+          "title": "Match Editing Services & Highlights",
+          "description": "Professional match video editing and summaries for all sports games.",
+          "imageUrl": "/images/match-editing.jpg",
+          "fullDescription": "Professional match video editing and highlights collection.\n\nPackages:\n- 5 matches: 25 KD\n- 10 matches: 40 KD\n- 20 matches: 45 KD\n\nOther Services:\n- Clips collection with editing\n- Uncut match video: 12 KD to 20 KD (depending on duration)\n\nNote: Ashkanani Sport players enjoy special discounted rates."
         }
       ]
     },
@@ -788,7 +795,7 @@
         {
           "platform": "Youtube",
           "icon": "FaYoutube",
-          "url": "https://www.youtube.com/@ashkananisport?si=442wNw7MbvuuLG22"
+          "url": "https://youtube.com/@ashkananisport?si=yO4vK-zuSOC4Fu3e"
         }
       ],
       "partners": [
@@ -1044,6 +1051,13 @@
           "title": " coming soon ",
           "description": "خدمه طلبات التصوير المباشر و الفردي و الجماعيه للفرق بجميع الالعاب (التصوير بخاصية الذكاء الاصطناعي الحديثة)",
           "videoUrl": "https://res.cloudinary.com/dl5duvmve/video/upload/v1758725977/service1_ikmxlj.mov"
+        },
+        {
+          "icon": "FaVideo",
+          "title": "خدمات المونتاج للمباريات وملخص لجميع اللعبات الرياضية",
+          "description": "مونتاج احترافي للمباريات وتجميع ملخصات لجميع الألعاب الرياضية.",
+          "imageUrl": "/images/match-editing.jpg",
+          "fullDescription": "خدمات المونتاج للمباريات وملخص لجميع اللعبات الرياضية.\n\nالباقات:\n- 5 مباريات 25 دينار\n- 10 مباريات 40 دينار\n- 20 مباراة 45 دينار\n\nخدمات إضافية:\n- تجميع لقطات مع مونتاج\n- فيديو بدون تقطيع للمباريات: من 12 دينار إلى 20 دينار (حسب دقائق الفيديو)\n\nملاحظة: لاعبو أشكناني سبورت يحصلون على أسعار خاصة."
         }
       ]
     },
@@ -1684,7 +1698,7 @@
         {
           "platform": "Youtube",
           "icon": "FaYoutube",
-          "url": "https://www.youtube.com/@ashkananisport?si=442wNw7MbvuuLG22"
+          "url": "https://youtube.com/@ashkananisport?si=yO4vK-zuSOC4Fu3e"
         }
       ],
       "partners": [

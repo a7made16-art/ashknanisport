@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FaFutbol, FaBullhorn, FaHandshake, FaAppleAlt, FaGavel, FaGlobe, FaBrain, FaDumbbell, FaCamera, FaTimes, FaPlay, FaVolumeUp, FaVolumeMute, FaPause } from 'react-icons/fa';
+import { FaFutbol, FaBullhorn, FaHandshake, FaAppleAlt, FaGavel, FaGlobe, FaBrain, FaDumbbell, FaCamera, FaTimes, FaPlay, FaVolumeUp, FaVolumeMute, FaPause, FaVideo } from 'react-icons/fa';
 
 const iconMap = {
     FaFutbol: <FaFutbol />,
@@ -11,6 +11,7 @@ const iconMap = {
     FaBrain: <FaBrain />,
     FaDumbbell: <FaDumbbell />,
     FaCamera: <FaCamera />,
+    FaVideo: <FaVideo />,
 };
 
 const Services = ({ content, language }) => {
@@ -217,11 +218,17 @@ const Services = ({ content, language }) => {
                                 )
                             ) : (
                                 <div className="services-modal-details">
-                                    <div className="services-modal-icon-large">{iconMap[selectedService.icon]}</div>
+                                    {selectedService.imageUrl ? (
+                                        <div className="services-modal-image">
+                                            <img src={selectedService.imageUrl} alt={selectedService.title} />
+                                        </div>
+                                    ) : (
+                                        <div className="services-modal-icon-large">{iconMap[selectedService.icon]}</div>
+                                    )}
                                     <div className="services-modal-full-description">
                                         <p>{selectedService.description}</p>
                                         {selectedService.fullDescription && (
-                                            <div className="services-modal-additional-details">
+                                            <div className="services-modal-additional-details" style={{ whiteSpace: 'pre-line' }}>
                                                 {selectedService.fullDescription}
                                             </div>
                                         )}
