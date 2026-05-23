@@ -11,7 +11,8 @@
         "contact": "Book Consultation",
         "playerSigning": "Signing Process",
         "agentBenefits": "Why Agent",
-        "AshknaniChampionship": "Ashknani Championship"
+        "AshknaniChampionship": "Ashknani Championship",
+        "sponsors": "Sponsors"
       },
       "transferButton": "Ashkanani Transfer",
       "lang_toggle": "العربية"
@@ -45,7 +46,11 @@
           "Sports Advisor to the Kuwait School and Higher Education Federation.",
           "Certified international lecturer from European Beta and the American Board.",
           "Accredited by the Public Authority for Applied Education & FIFA.",
-          "Lecturer at the General Sports Authority in the field of educational and sports administration"
+          "Lecturer at the General Sports Authority in the field of educational and sports administration",
+          {
+            "text": "Participant in the \"Peace Ambassadors\" National Program by the Youth Public Authority (2026)",
+            "image": "/images/certificate-peace-ambassadors.png"
+          }
         ]
       }
     },
@@ -914,7 +919,8 @@
         "contact": "احجز استشارتك",
         "playerSigning": "طريقة توقيع اللاعبين",
         "agentBenefits": "فائدة وكيل اللاعبين",
-        "AshknaniChampionship": "بطولة أشكناني"
+        "AshknaniChampionship": "بطولة أشكناني",
+        "sponsors": "الرعاة"
       },
       "transferButton": "اشكناني لسوق الانتقالات",
       "lang_toggle": "English"
@@ -948,7 +954,11 @@
           "مستشار الألعاب الرياضية بالاتحاد الكويتي المدرسي والتعليم العالي.",
           "محاضر دولي معتمد من البيتا الأوروبي والبورد الأمريكي.",
           "معتمد من الهيئة العامة للتعليم التطبيقي و FIFA.",
-          "محاضر فى الهيئة العامة للرياضة فى مجال الادارة التربوية والرياضية"
+          "محاضر فى الهيئة العامة للرياضة فى مجال الادارة التربوية والرياضية",
+          {
+            "text": "مشارك في البرنامج الوطني \"سفراء السلام\" المقدم من الهيئة العامة للشباب (2026)",
+            "image": "/images/certificate-peace-ambassadors.png"
+          }
         ]
       }
     },

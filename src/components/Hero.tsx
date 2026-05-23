@@ -67,7 +67,7 @@ const Hero: React.FC<HeroProps> = ({ content, language }) => {
                         rel="noopener noreferrer" 
                         className="hero-official-btn"
                     >
-                        {language === 'en' ? 'Official Website' : 'الموقع الرسمي'}
+                        {language === 'ar' ? 'الموقع الرسمي' : 'Official Website'}
                     </a>
                 </div>
             </div>

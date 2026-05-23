@@ -160,3 +160,186 @@ body[dir="rtl"] .founder-profile ul li svg {
     margin-right: 0;
     margin-left: 10px;
 }
+
+/* ── Rich Credential Items ── */
+.founder-profile ul li.credential-has-cert {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.4rem;
+    padding: 0.55rem 0.7rem;
+    border-radius: 10px;
+    background: rgba(212, 175, 55, 0.07);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 0.6rem;
+}
+
+.founder-profile ul li.credential-has-cert:hover {
+    background: rgba(212, 175, 55, 0.13);
+    border-color: rgba(212, 175, 55, 0.45);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.12);
+}
+
+.credential-text {
+    flex: 1;
+    line-height: 1.5;
+}
+
+/* ── View Certificate Badge ── */
+.view-cert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.3rem;
+    padding: 0.28rem 0.75rem;
+    border: 1px solid var(--accent-color);
+    border-radius: 20px;
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--accent-color);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+    white-space: nowrap;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    letter-spacing: 0.03em;
+}
+
+.view-cert-badge svg {
+    font-size: 0.8rem;
+    transition: transform 0.25s ease;
+}
+
+.view-cert-badge:hover {
+    background: rgba(212, 175, 55, 0.25);
+    box-shadow: 0 0 14px rgba(212, 175, 55, 0.35);
+    transform: translateY(-1px);
+}
+
+.view-cert-badge:hover svg {
+    transform: scale(1.25);
+}
+
+.view-cert-badge:active {
+    transform: translateY(0);
+}
+
+/* ── Certificate Lightbox Overlay ── */
+.cert-lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: certOverlayIn 0.25s ease;
+}
+
+@keyframes certOverlayIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.cert-lightbox-container {
+    position: relative;
+    background: #1a2030;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 18px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.12);
+    max-width: 750px;
+    width: 100%;
+    overflow: hidden;
+    animation: certBoxIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes certBoxIn {
+    from { opacity: 0; transform: scale(0.88) translateY(30px); }
+    to   { opacity: 1; transform: scale(1)   translateY(0); }
+}
+
+.cert-lightbox-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 10;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: var(--accent-color);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    font-size: 0.95rem;
+}
+
+body[dir="rtl"] .cert-lightbox-close {
+    right: auto;
+    left: 0.75rem;
+}
+
+.cert-lightbox-close:hover {
+    background: rgba(212, 175, 55, 0.28);
+    transform: rotate(90deg);
+}
+
+.cert-lightbox-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 1.25rem 0.75rem;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.cert-lightbox-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.cert-lightbox-body {
+    padding: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cert-lightbox-image {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    display: block;
+}
+
+/* ── Responsive ── */
+@media (max-width: 576px) {
+    .cert-lightbox-container {
+        border-radius: 14px;
+    }
+
+    .cert-lightbox-header {
+        font-size: 0.9rem;
+        padding: 0.8rem 1rem 0.6rem;
+    }
+
+    .cert-lightbox-body {
+        padding: 0.9rem;
+    }
+
+    .view-cert-badge {
+        font-size: 0.73rem;
+        padding: 0.25rem 0.6rem;
+    }
+}
