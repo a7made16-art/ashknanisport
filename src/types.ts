@@ -32,16 +32,11 @@ export interface HeroContent {
   sliderImages: { url: string; alt: string }[];
 }
 
-export interface CredentialItem {
-  text: string;
-  image?: string;
-}
-
 export interface Founder {
   name: string;
   role: string;
   photo: string;
-  credentials: (string | CredentialItem)[];
+  credentials: string[];
 }
 
 export interface AboutContent {

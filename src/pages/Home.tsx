@@ -23,7 +23,7 @@ const Home: React.FC<HomeProps> = ({ currentContent, language }) => {
     return (
         <main>
             <Hero content={currentContent.hero} language={language} />
-            <About content={currentContent.about} language={language} />
+            <About content={currentContent.about} />
             <AgentBenefits content={currentContent.agentBenefits} />
             <Services content={currentContent.services} language={language} />
             
