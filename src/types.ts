@@ -3,7 +3,6 @@
 export type Language = 'en' | 'ar';
 
 export interface NavItem {
-  home: string;
   about: string;
   services: string;
   achievements: string;
@@ -11,10 +10,6 @@ export interface NavItem {
   gallery: string;
   documents: string;
   contact: string;
-  agentBenefits: string;
-  playerSigning: string;
-  AshknaniChampionship: string;
-  sponsors: string;
 }
 
 export interface HeaderContent {
@@ -266,44 +261,7 @@ export interface LanguageContent {
   documents: DocumentsContent;
   contact: ContactContent;
   consultationBooking: ConsultationBookingContent;
-  ashkaniChampionship: any;
-  advertisements: Advertisement[];
+  advertisements: Advertisement[]; // إضافة هذا السطر
   footer: FooterContent;
 }
-
-export interface Sponsor {
-    id: number;
-    name_ar: string;
-    name_en: string;
-    services_ar?: string;
-    services_en?: string;
-    logo_url: string;
-    website_url?: string;
-    tier?: 'diamond' | 'gold' | 'silver' | 'partner';
-    images?: SponsorImage[];
-    discounts?: Discount[];
-}
-
-export interface SponsorImage {
-    id: number;
-    image_url: string;
-}
-
-export interface Discount {
-    id: number;
-    title_ar: string;
-    title_en: string;
-    description_ar?: string;
-    description_en?: string;
-    code?: string;
-    image_url?: string;
-    sponsor_id?: number;
-    sponsor?: {
-        id: number;
-        name_ar: string;
-        name_en: string;
-        logo_url: string;
-    };
-}
-
 
