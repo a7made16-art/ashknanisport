@@ -91,7 +91,7 @@ const [formData, setFormData] = useState({
       slotBooked: 'الميعاد محجوز بالفعل، اختر وقت آخر.',
       bookingSuccess: 'تم فتح واتساب لإتمام الحجز.',
       whatsappMessage: (name: string, phone: string, serviceTitle: string, priceText: string, date: string, time: string) => 
-        `مرحباً، أود حجز استشارة مع الكابتن أحمد جابر أشكناني\n\nالاسم: ${name}\nرقم الهاتف: ${phone}\nنوع الاستشارة: ${serviceTitle}\nالسعر: ${priceText}\nالتاريخ: ${date}\nالوقت: ${time}\n\nالعنوان: ${content.contact.address}\nرابط الخريطة: https://maps.app.goo.gl/3Jb79urRoU7VGmi27`,
+        `مرحباً، أود حجز استشارة مع الكابتن أحمد جابر أشكناني\n\nالاسم: ${name}\nرقم الهاتف: ${phone}\nنوع الاستشارة: ${serviceTitle}\nالسعر: ${priceText}\nالتاريخ: ${date}\nالوقت: ${time}\n\nالعنوان: ${content.contact.address}\nرابط الخريطة: https://maps.app.goo.gl/CapKa1grxPnRLe9b9?g_st=ic`,
       whatsappButton: 'حجز عبر واتساب',
       mapPlaceholder: 'معلومات الخريطة غير متوفرة',
       selectService: 'اختر الاستشارة',
@@ -100,17 +100,17 @@ const [formData, setFormData] = useState({
         { value: '10:00 صباحاً', label: '10:00 صباحاً' },
         { value: '11:00 صباحاً', label: '11:00 صباحاً' },
         { value: '12:00 ظهراً', label: '12:00 ظهراً' },
-        { value: '5:00 مساءً', label: '5:00 مساءً' },
-        { value: '6:00 مساءً', label: '6:00 مساءً' },
-        { value: '7:00 مساءً', label: '7:00 مساءً' },
-        { value: '8:00 مساءً', label: '8:00 مساءً' }
+        { value: '5:00 - 6:00 مساءً', label: '5:00 - 6:00 مساءً' },
+        { value: '6:00 - 7:00 مساءً', label: '6:00 - 7:00 مساءً' },
+        { value: '7:00 - 8:00 مساءً', label: '7:00 - 8:00 مساءً' },
+        { value: '8:00 - 9:00 مساءً', label: '8:00 - 9:00 مساءً' }
       ],
       saturdayTimeOptions: [
-        { value: '4:00 مساءً', label: '4:00 مساءً' },
-        { value: '5:00 مساءً', label: '5:00 مساءً' },
-        { value: '6:00 مساءً', label: '6:00 مساءً' },
-        { value: '7:00 مساءً', label: '7:00 مساءً' },
-        { value: '8:00 مساءً', label: '8:00 مساءً' }
+        { value: '4:00 - 5:00 مساءً', label: '4:00 - 5:00 مساءً' },
+        { value: '5:00 - 6:00 مساءً', label: '5:00 - 6:00 مساءً' },
+        { value: '6:00 - 7:00 مساءً', label: '6:00 - 7:00 مساءً' },
+        { value: '7:00 - 8:00 مساءً', label: '7:00 - 8:00 مساءً' },
+        { value: '8:00 - 9:00 مساءً', label: '8:00 - 9:00 مساءً' }
       ]
     },
     en: {
@@ -126,7 +126,7 @@ const [formData, setFormData] = useState({
       slotBooked: 'This time slot is already booked. Please choose another.',
       bookingSuccess: 'Opening WhatsApp to complete your booking.',
       whatsappMessage: (name: string, phone: string, serviceTitle: string, priceText: string, date: string, time: string) => 
-        `Hello, I would like to book a consultation with Captain Ahmed Jaber Ashkanani\n\nName: ${name}\nPhone: ${phone}\nConsultation Type: ${serviceTitle}\nPrice: ${priceText}\nDate: ${date}\nTime: ${time}\n\nAddress: ${content.contact.address}\nMap Link: https://maps.app.goo.gl/3Jb79urRoU7VGmi27`,
+        `Hello, I would like to book a consultation with Captain Ahmed Jaber Ashkanani\n\nName: ${name}\nPhone: ${phone}\nConsultation Type: ${serviceTitle}\nPrice: ${priceText}\nDate: ${date}\nTime: ${time}\n\nAddress: ${content.contact.address}\nMap Link: https://maps.app.goo.gl/CapKa1grxPnRLe9b9?g_st=ic`,
       whatsappButton: 'Book via WhatsApp',
       mapPlaceholder: 'Map information is unavailable',
       selectService: 'Select Consultation',
@@ -135,17 +135,17 @@ const [formData, setFormData] = useState({
         { value: '10:00 AM', label: '10:00 AM' },
         { value: '11:00 AM', label: '11:00 AM' },
         { value: '12:00 PM', label: '12:00 PM' },
-        { value: '5:00 PM', label: '5:00 PM' },
-        { value: '6:00 PM', label: '6:00 PM' },
-        { value: '7:00 PM', label: '7:00 PM' },
-        { value: '8:00 PM', label: '8:00 PM' }
+        { value: '5:00 - 6:00 PM', label: '5:00 - 6:00 PM' },
+        { value: '6:00 - 7:00 PM', label: '6:00 - 7:00 PM' },
+        { value: '7:00 - 8:00 PM', label: '7:00 - 8:00 PM' },
+        { value: '8:00 - 9:00 PM', label: '8:00 - 9:00 PM' }
       ],
       saturdayTimeOptions: [
-        { value: '4:00 PM', label: '4:00 PM' },
-        { value: '5:00 PM', label: '5:00 PM' },
-        { value: '6:00 PM', label: '6:00 PM' },
-        { value: '7:00 PM', label: '7:00 PM' },
-        { value: '8:00 PM', label: '8:00 PM' }
+        { value: '4:00 - 5:00 PM', label: '4:00 - 5:00 PM' },
+        { value: '5:00 - 6:00 PM', label: '5:00 - 6:00 PM' },
+        { value: '6:00 - 7:00 PM', label: '6:00 - 7:00 PM' },
+        { value: '7:00 - 8:00 PM', label: '7:00 - 8:00 PM' },
+        { value: '8:00 - 9:00 PM', label: '8:00 - 9:00 PM' }
       ]
     }
   };

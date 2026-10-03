@@ -691,45 +691,39 @@
       "services": [
         {
           "id": 1,
-          "title": "Technical consultation for players or coaches",
-          "price": 20,
-          "description": "Specialized technical consultation for players and coaches to improve performance"
+          "title": "Technical consultation for players and coaches",
+          "price": 30,
+          "description": "Specialized technical consultation for players and coaches"
         },
         {
           "id": 2,
-          "title": "Future suggestions for players or coaches",
-          "price": 15,
-          "description": "Guidance and advice for the professional future of players and coaches"
+          "title": "Future suggestions",
+          "price": 20,
+          "description": "Guidance and advice for the professional future"
         },
         {
           "id": 3,
-          "title": "Psychological consultation for athletes",
-          "price": 10,
-          "description": "Specialized psychological support for athletes to overcome mental challenges"
+          "title": "Psychological and motivational rehab consultation for athletes",
+          "price": 20,
+          "description": "Specialized psychological support for athletes"
         },
         {
           "id": 4,
-          "title": "Consultation on opening a sports academy",
-          "price": 30,
+          "title": "Sports academy opening consultation (all sports, licensing, federation)",
+          "price": 45,
           "description": "Advice and guidance for creating a successful sports academy"
         },
         {
           "id": 5,
-          "title": "Consultation on player agents and sports marketing",
-          "price": 30,
-          "description": "Learn everything related to player agencies and sports marketing"
+          "title": "Private lecture: How to become a certified player agent, exams and information",
+          "price": 50,
+          "description": "Learn everything related to player agencies"
         },
         {
           "id": 6,
-          "title": "Administrative culture for sports administrators",
-          "price": 30,
-          "description": "Developing administrative skills for workers in the sports field"
-        },
-        {
-          "id": 7,
-          "title": "Booking for signing or attending an official meeting for players and coaches who have joined us.",
-          "price": "no fees",
-          "description": "A dedicated service for players and coaches who have joined our company, allowing them to book official appointments for contract signing or organizational meetings with our team to ensure a professional start and successful collaboration."
+          "title": "Professional sports management culture lecture",
+          "price": 40,
+          "description": "Developing administrative skills"
         }
       ],
       "form": {
@@ -741,7 +735,7 @@
         "submit": "send request"
       },
       "contact": {
-        "address": "7WW9+FC, Ardiya, Kuwait",
+        "address": "Captain Ahmed Jaber Ashkanani Office 🏢 Al Mirqab Towers 24 - 5th Floor 5️⃣",
         "phone": 96597131223,
         "email": "info@ashkananisport.com",
         "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3479.528461938946!2d47.91852850000001!3d29.2961703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf91ffebb1dda5%3A0x2b30b824da3bcbc4!2z2YXZg9iq2Kgg2YPYp9io2KrZhiDYo9it2YXYryDYo9i02YPZhtin2YbZig!5e0!3m2!1sen!2seg!4v1758130217501!5m2!1sen!2seg"
@@ -800,103 +794,103 @@
       ],
       "partners": [
         {
-          "name": "",
-          "logoUrl": "/images/partner1.jpg",
+          "name": "FIFA",
+          "logoUrl": "/images/fifa.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner2.jpg",
+          "name": "Kuwait FA",
+          "logoUrl": "/images/kuwait-fa.png",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner3.jpg",
+          "name": "Saudi FA",
+          "logoUrl": "/images/saudi-fa.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner4.jpg",
+          "name": "Ashkanani Tournament",
+          "logoUrl": "/images/ashkanani-tournament.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner5.jpg",
+          "name": "Al-Tawjeeh Law Group",
+          "logoUrl": "/images/al-tawjeeh.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner6.jpg",
+          "name": "Adidas",
+          "logoUrl": "/images/adidas.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner7.jpg",
+          "name": "Spark Sport",
+          "logoUrl": "/images/spark-sport.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner8.jpg",
+          "name": "Titanium",
+          "logoUrl": "/images/titanium.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner9.jpg",
+          "name": "Rise",
+          "logoUrl": "/images/rise.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner10.jpg",
+          "name": "Prime Studios",
+          "logoUrl": "/images/prime-studios.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner11.jpg",
+          "name": "Seen Jeem",
+          "logoUrl": "/images/seen-jeem.jpg",
           "url": ""
         },
         {
-          "name": "",
+          "name": "Albumii",
+          "logoUrl": "/images/albumii.jpg",
+          "url": ""
+        },
+        {
+          "name": "Trolley",
+          "logoUrl": "/images/trolley.jpg",
+          "url": ""
+        },
+        {
+          "name": "Blackened",
+          "logoUrl": "/images/blackened.jpg",
+          "url": ""
+        },
+        {
+          "name": "VS",
           "logoUrl": "/images/partner12.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner13.jpg",
+          "name": "Flare Fitness",
+          "logoUrl": "/images/flare-fitness.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner14.jpg",
+          "name": "CRYO",
+          "logoUrl": "/images/cryo.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner15.jpg",
+          "name": "Spa Corner",
+          "logoUrl": "/images/spa-corner.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner16.jpg",
+          "name": "Homely Spa",
+          "logoUrl": "/images/homely-spa.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner17.jpg",
-          "url": ""
-        },
-        {
-          "name": "",
-          "logoUrl": "/images/partner18.jpg",
-          "url": ""
-        },
-        {
-          "name": "",
-          "logoUrl": "/images/partner19.jpg",
-          "url": ""
-        },
-        {
-          "name": "",
-          "logoUrl": "/images/partner20.jpg",
+          "name": "Star One Academy",
+          "logoUrl": "/images/partner10.jpg",
           "url": ""
         }
       ]
@@ -1594,45 +1588,39 @@
       "services": [
         {
           "id": 1,
-          "title": "استشاره فنية للاعبين او المدربين",
-          "price": 20,
-          "description": "استشارة فنية متخصصة للاعبين والمدربين لتحسين الأداء"
+          "title": "استشارة فنية للاعبين والمدربين",
+          "price": 30,
+          "description": "استشارة فنية متخصصة للاعبين والمدربين"
         },
         {
           "id": 2,
-          "title": "اقتراحات مستقبلية للاعب او المدرب",
-          "price": 15,
-          "description": "توجيهات ونصائح للمستقبل المهني للاعبين والمدربين"
+          "title": "اقراحات مستقبليه",
+          "price": 20,
+          "description": "توجيه ونصائح للمستقبل الاحترافي"
         },
         {
           "id": 3,
-          "title": "استشاره للأمور نفسيه للشخص الرياضي",
-          "price": 10,
-          "description": "دعم نفسي متخصص للرياضيين للتغلب على التحديات النفسية"
+          "title": "استشاره تأهيل نفسي و تحفيزي للرياضي",
+          "price": 20,
+          "description": "دعم نفسي متخصص للرياضيين"
         },
         {
           "id": 4,
-          "title": "استشاره كيفيه أفتتاح أكاديمية رياضية",
-          "price": 30,
+          "title": "استشاره افتتاح أكادميه رياضيه لجميع الالعاب و طريقه عمل الرخصه في وزاره التجاره و هيئه الرياضه و الاتحاد المعني",
+          "price": 45,
           "description": "نصائح وتوجيهات لإنشاء أكاديمية رياضية ناجحة"
         },
         {
           "id": 5,
-          "title": "استشاره عن وكلاء اللاعبين و التسويق الرياضي",
-          "price": 30,
-          "description": "معرفة كل ما يتعلق بوكالات اللاعبين والتسويق الرياضي"
+          "title": "محاضره برايفت كيف تكون وكيل لاعبين معتمد و طرق الاختبار و المعلومات",
+          "price": 50,
+          "description": "تعلم كل ما يخص وكالة اللاعبين"
         },
         {
           "id": 6,
-          "title": "الثقافه الإداريه للإداري الرياضي",
-          "price": 30,
-          "description": "تطوير المهارات الإدارية للعاملين في المجال الرياضي"
-        },
-        {
-          "id": 7,
-          "title": "الحجز للتوقيع أو لحضور اجتماع رسمي للاعبين والمدربين المنضمين إلينا",
-          "price": "معفي من الرسوم",
-          "description": "خدمة مخصّصة للاعبين والمدربين المنضمين إلى شركتنا، تتيح لهم حجز موعد رسمي لتوقيع العقود أو حضور الاجتماعات التنظيمية مع فريقنا، لضمان بداية احترافية وتعاون ناجح."
+          "title": "محاضره الثقافه الاداريه الاحترافيه الرياضيه",
+          "price": 40,
+          "description": "تطوير المهارات الإدارية"
         }
       ],
       "form": {
@@ -1644,7 +1632,7 @@
         "submit": "إرسال الطلب"
       },
       "contact": {
-        "address": "العارضية , الكويت",
+        "address": "مكتب الكابتن أ. أحمد جابر أشكناني 🏢 أبراج المرقاب 24 – الدور الخامس 5️⃣",
         "phone": 96597131223,
         "email": "info@ashkananisport.com",
         "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3479.528461938946!2d47.91852850000001!3d29.2961703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf91ffebb1dda5%3A0x2b30b824da3bcbc4!2z2YXZg9iq2Kgg2YPYp9io2KrZhiDYo9it2YXYryDYo9i02YPZhtin2YbZig!5e0!3m2!1sen!2seg!4v1758130217501!5m2!1sen!2seg"
@@ -1703,103 +1691,103 @@
       ],
       "partners": [
         {
-          "name": "",
-          "logoUrl": "/images/partner1.jpg",
+          "name": "فيفا",
+          "logoUrl": "/images/fifa.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner2.jpg",
+          "name": "الاتحاد الكويتي",
+          "logoUrl": "/images/kuwait-fa.png",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner3.jpg",
+          "name": "الاتحاد السعودي",
+          "logoUrl": "/images/saudi-fa.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner4.jpg",
+          "name": "بطولة عائلة اشكناني",
+          "logoUrl": "/images/ashkanani-tournament.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner5.jpg",
+          "name": "مجموعة التوجيه القانونية",
+          "logoUrl": "/images/al-tawjeeh.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner6.jpg",
+          "name": "أديداس",
+          "logoUrl": "/images/adidas.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner7.jpg",
+          "name": "سبارك سبورت",
+          "logoUrl": "/images/spark-sport.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner8.jpg",
+          "name": "تيتانيوم",
+          "logoUrl": "/images/titanium.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner9.jpg",
+          "name": "رايز",
+          "logoUrl": "/images/rise.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner10.jpg",
+          "name": "برايم ستوديوز",
+          "logoUrl": "/images/prime-studios.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner11.jpg",
+          "name": "سين جيم",
+          "logoUrl": "/images/seen-jeem.jpg",
           "url": ""
         },
         {
-          "name": "",
+          "name": "البوم",
+          "logoUrl": "/images/albumii.jpg",
+          "url": ""
+        },
+        {
+          "name": "ترولي",
+          "logoUrl": "/images/trolley.jpg",
+          "url": ""
+        },
+        {
+          "name": "Blackened",
+          "logoUrl": "/images/blackened.jpg",
+          "url": ""
+        },
+        {
+          "name": "VS",
           "logoUrl": "/images/partner12.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner13.jpg",
+          "name": "فلير",
+          "logoUrl": "/images/flare-fitness.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner14.jpg",
+          "name": "كرايو",
+          "logoUrl": "/images/cryo.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner15.jpg",
+          "name": "سبا كورنر",
+          "logoUrl": "/images/spa-corner.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner16.jpg",
+          "name": "هوملي سبا",
+          "logoUrl": "/images/homely-spa.jpg",
           "url": ""
         },
         {
-          "name": "",
-          "logoUrl": "/images/partner17.jpg",
-          "url": ""
-        },
-        {
-          "name": "",
-          "logoUrl": "/images/partner18.jpg",
-          "url": ""
-        },
-        {
-          "name": "",
-          "logoUrl": "/images/partner19.jpg",
-          "url": ""
-        },
-        {
-          "name": "",
-          "logoUrl": "/images/partner20.jpg",
+          "name": "أكاديمية ستار",
+          "logoUrl": "/images/partner10.jpg",
           "url": ""
         }
       ]

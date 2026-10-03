@@ -235,40 +235,7 @@ const PlayerSigning: React.FC<PlayerSigningProps> = ({ content,language }) => {
                     </ul>
                   </div>
                   <div className="signing-media">
-                    <div className="signing-audio">
-                      <h4>{content.audioTitle}</h4>
-                      <div className="audio-container">
-                        <div className="audio-player">
-                          <div className="audio-controls">
-                            <button 
-                              className={`play-pause-btn ${isPlaying && currentAudio === 'professional' ? 'playing' : ''}`}
-                              onClick={togglePlayPause}
-                              aria-label={isPlaying && currentAudio === 'professional' ? "إيقاف الصوت" : "تشغيل الصوت"}
-                            >
-                              {isPlaying && currentAudio === 'professional' ? (
-                                <span className="pause-icon">❚❚</span>
-                              ) : (
-                                <span className="play-icon">▶</span>
-                              )}
-                            </button>
-                            <div className="audio-info">
-                              <div className="audio-title">{getCurrentAudioTitle()}</div>
-                              <div className="audio-subtitle">{content.professional.title}</div>
-                            </div>
-                          </div>
-                          <audio 
-                            ref={professionalAudioRef}
-                            src={content.professional.videoUrl}
-                            onPlay={() => {
-                              setIsPlaying(true);
-                              setCurrentAudio('professional');
-                            }}
-                            onPause={() => setIsPlaying(false)}
-                            onEnded={() => setIsPlaying(false)}
-                          />
-                        </div>
-                      </div>
-                    </div>
+
                     
                     {/* الصورة الافتراضية تحت الصوت */}
                     <div 
@@ -315,40 +282,7 @@ const PlayerSigning: React.FC<PlayerSigningProps> = ({ content,language }) => {
                     </ul>
                   </div>
                   <div className="signing-media">
-                    <div className="signing-audio">
-                      <h4>{content.audioTitle}</h4>
-                      <div className="audio-container">
-                        <div className="audio-player">
-                          <div className="audio-controls">
-                            <button 
-                              className={`play-pause-btn ${isPlaying && currentAudio === 'individual' ? 'playing' : ''}`}
-                              onClick={togglePlayPause}
-                              aria-label={isPlaying && currentAudio === 'individual' ? "إيقاف الصوت" : "تشغيل الصوت"}
-                            >
-                              {isPlaying && currentAudio === 'individual' ? (
-                                <span className="pause-icon">❚❚</span>
-                              ) : (
-                                <span className="play-icon">▶</span>
-                              )}
-                            </button>
-                            <div className="audio-info">
-                              <div className="audio-title">{getCurrentAudioTitle()}</div>
-                              <div className="audio-subtitle">{content.individual.title}</div>
-                            </div>
-                          </div>
-                          <audio 
-                            ref={individualAudioRef}
-                            src={content.individual.videoUrl}
-                            onPlay={() => {
-                              setIsPlaying(true);
-                              setCurrentAudio('individual');
-                            }}
-                            onPause={() => setIsPlaying(false)}
-                            onEnded={() => setIsPlaying(false)}
-                          />
-                        </div>
-                      </div>
-                    </div>
+
                     
                     {/* الصورة الافتراضية تحت الصوت */}
                     <div 
