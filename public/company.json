@@ -154,7 +154,7 @@
           "title": "Match Editing Services & Highlights",
           "description": "Professional match video editing and summaries for all sports games.",
           "imageUrl": "/images/match-editing.jpg",
-          "fullDescription": "Professional match video editing and highlights collection.\n\nPackages:\n- 5 matches: 25 KD\n- 10 matches: 40 KD\n- 20 matches: 45 KD\n\nOther Services:\n- Clips collection with editing\n- Uncut match video: 12 KD to 20 KD (depending on duration)\n\nNote: Ashkanani Sport players enjoy special discounted rates."
+          "fullDescription": "Professional match video editing and highlights collection.\n\nPackages:\n- 1 match: 6 KD\n- 2 matches: 12 KD\n- 3 matches: 20 KD\n- 4 matches: 26 KD\n\nThe package price includes the company logo. Add 3 KD for a version without the company logo.\n\nNote: Ashkanani Sport players enjoy special discounted rates."
         }
       ]
     },
@@ -691,39 +691,45 @@
       "services": [
         {
           "id": 1,
-          "title": "Technical consultation for players and coaches",
-          "price": 30,
-          "description": "Specialized technical consultation for players and coaches"
+          "title": "Technical consultation for players or coaches",
+          "price": 20,
+          "description": "Specialized technical consultation for players and coaches to improve performance"
         },
         {
           "id": 2,
-          "title": "Future suggestions",
-          "price": 20,
-          "description": "Guidance and advice for the professional future"
+          "title": "Future suggestions for players or coaches",
+          "price": 15,
+          "description": "Guidance and advice for the professional future of players and coaches"
         },
         {
           "id": 3,
-          "title": "Psychological and motivational rehab consultation for athletes",
-          "price": 20,
-          "description": "Specialized psychological support for athletes"
+          "title": "Psychological consultation for athletes",
+          "price": 10,
+          "description": "Specialized psychological support for athletes to overcome mental challenges"
         },
         {
           "id": 4,
-          "title": "Sports academy opening consultation (all sports, licensing, federation)",
-          "price": 45,
+          "title": "Consultation on opening a sports academy",
+          "price": 30,
           "description": "Advice and guidance for creating a successful sports academy"
         },
         {
           "id": 5,
-          "title": "Private lecture: How to become a certified player agent, exams and information",
-          "price": 50,
-          "description": "Learn everything related to player agencies"
+          "title": "Consultation on player agents and sports marketing",
+          "price": 30,
+          "description": "Learn everything related to player agencies and sports marketing"
         },
         {
           "id": 6,
-          "title": "Professional sports management culture lecture",
-          "price": 40,
-          "description": "Developing administrative skills"
+          "title": "Administrative culture for sports administrators",
+          "price": 30,
+          "description": "Developing administrative skills for workers in the sports field"
+        },
+        {
+          "id": 7,
+          "title": "Booking for signing or attending an official meeting for players and coaches who have joined us.",
+          "price": "no fees",
+          "description": "A dedicated service for players and coaches who have joined our company, allowing them to book official appointments for contract signing or organizational meetings with our team to ensure a professional start and successful collaboration."
         }
       ],
       "form": {
@@ -735,7 +741,7 @@
         "submit": "send request"
       },
       "contact": {
-        "address": "Captain Ahmed Jaber Ashkanani Office 🏢 Al Mirqab Towers 24 - 5th Floor 5️⃣",
+        "address": "7WW9+FC, Ardiya, Kuwait",
         "phone": 96597131223,
         "email": "info@ashkananisport.com",
         "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3479.528461938946!2d47.91852850000001!3d29.2961703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf91ffebb1dda5%3A0x2b30b824da3bcbc4!2z2YXZg9iq2Kgg2YPYp9io2KrZhiDYo9it2YXYryDYo9i02YPZhtin2YbZig!5e0!3m2!1sen!2seg!4v1758130217501!5m2!1sen!2seg"
@@ -809,13 +815,13 @@
           "url": ""
         },
         {
-          "name": "Ashkanani Tournament",
-          "logoUrl": "/images/ashkanani-tournament.jpg",
+          "name": "Kuwait Olympic Committee",
+          "logoUrl": "/images/partner2.jpg",
           "url": ""
         },
         {
-          "name": "Al-Tawjeeh Law Group",
-          "logoUrl": "/images/al-tawjeeh.jpg",
+          "name": "Ashkanani Tournament",
+          "logoUrl": "/images/ashkanani-tournament.jpg",
           "url": ""
         },
         {
@@ -829,8 +835,38 @@
           "url": ""
         },
         {
+          "name": "Myology Academy",
+          "logoUrl": "/images/partner14.jpg",
+          "url": ""
+        },
+        {
+          "name": "Tigers Squad",
+          "logoUrl": "/images/partner15.jpg",
+          "url": ""
+        },
+        {
+          "name": "ACE Sports",
+          "logoUrl": "/images/partner7.jpg",
+          "url": ""
+        },
+        {
+          "name": "Star One Beach Soccer",
+          "logoUrl": "/images/partner10.jpg",
+          "url": ""
+        },
+        {
+          "name": "SAVE.",
+          "logoUrl": "/images/partner13.jpg",
+          "url": ""
+        },
+        {
           "name": "Titanium",
           "logoUrl": "/images/titanium.jpg",
+          "url": ""
+        },
+        {
+          "name": "Al-Tawjeeh Law Group",
+          "logoUrl": "/images/al-tawjeeh.jpg",
           "url": ""
         },
         {
@@ -854,6 +890,11 @@
           "url": ""
         },
         {
+          "name": "VS Vauntsquare",
+          "logoUrl": "/images/partner12.jpg",
+          "url": ""
+        },
+        {
           "name": "Trolley",
           "logoUrl": "/images/trolley.jpg",
           "url": ""
@@ -864,8 +905,8 @@
           "url": ""
         },
         {
-          "name": "VS",
-          "logoUrl": "/images/partner12.jpg",
+          "name": "Q8Boots",
+          "logoUrl": "/images/partner9.jpg",
           "url": ""
         },
         {
@@ -874,8 +915,23 @@
           "url": ""
         },
         {
+          "name": "Star Academy",
+          "logoUrl": "/images/partner8.jpg",
+          "url": ""
+        },
+        {
           "name": "CRYO",
           "logoUrl": "/images/cryo.jpg",
+          "url": ""
+        },
+        {
+          "name": "DIET",
+          "logoUrl": "/images/diet.jpg",
+          "url": ""
+        },
+        {
+          "name": "Toscana Clinic",
+          "logoUrl": "/images/toscana-clinic.jpg",
           "url": ""
         },
         {
@@ -886,11 +942,6 @@
         {
           "name": "Homely Spa",
           "logoUrl": "/images/homely-spa.jpg",
-          "url": ""
-        },
-        {
-          "name": "Star One Academy",
-          "logoUrl": "/images/partner10.jpg",
           "url": ""
         }
       ]
@@ -1051,7 +1102,7 @@
           "title": "خدمات المونتاج للمباريات وملخص لجميع اللعبات الرياضية",
           "description": "مونتاج احترافي للمباريات وتجميع ملخصات لجميع الألعاب الرياضية.",
           "imageUrl": "/images/match-editing.jpg",
-          "fullDescription": "خدمات المونتاج للمباريات وملخص لجميع اللعبات الرياضية.\n\nالباقات:\n- 5 مباريات 25 دينار\n- 10 مباريات 40 دينار\n- 20 مباراة 45 دينار\n\nخدمات إضافية:\n- تجميع لقطات مع مونتاج\n- فيديو بدون تقطيع للمباريات: من 12 دينار إلى 20 دينار (حسب دقائق الفيديو)\n\nملاحظة: لاعبو أشكناني سبورت يحصلون على أسعار خاصة."
+          "fullDescription": "خدمات المونتاج للمباريات وملخص لجميع اللعبات الرياضية.\n\nالباقات:\n- مباراة واحدة: 6 د.ك\n- مباراتان: 12 د.ك\n- 3 مباريات: 20 د.ك\n- 4 مباريات: 26 د.ك\n\nالسعر المعلن يشمل شعار الشركة. للحصول على المونتاج بدون شعار الشركة، تُضاف 3 د.ك.\n\nملاحظة: لاعبو أشكناني سبورت يحصلون على أسعار خاصة."
         }
       ]
     },
@@ -1588,39 +1639,45 @@
       "services": [
         {
           "id": 1,
-          "title": "استشارة فنية للاعبين والمدربين",
-          "price": 30,
-          "description": "استشارة فنية متخصصة للاعبين والمدربين"
+          "title": "استشاره فنية للاعبين او المدربين",
+          "price": 20,
+          "description": "استشارة فنية متخصصة للاعبين والمدربين لتحسين الأداء"
         },
         {
           "id": 2,
-          "title": "اقراحات مستقبليه",
-          "price": 20,
-          "description": "توجيه ونصائح للمستقبل الاحترافي"
+          "title": "اقتراحات مستقبلية للاعب او المدرب",
+          "price": 15,
+          "description": "توجيهات ونصائح للمستقبل المهني للاعبين والمدربين"
         },
         {
           "id": 3,
-          "title": "استشاره تأهيل نفسي و تحفيزي للرياضي",
-          "price": 20,
-          "description": "دعم نفسي متخصص للرياضيين"
+          "title": "استشاره للأمور نفسيه للشخص الرياضي",
+          "price": 10,
+          "description": "دعم نفسي متخصص للرياضيين للتغلب على التحديات النفسية"
         },
         {
           "id": 4,
-          "title": "استشاره افتتاح أكادميه رياضيه لجميع الالعاب و طريقه عمل الرخصه في وزاره التجاره و هيئه الرياضه و الاتحاد المعني",
-          "price": 45,
+          "title": "استشاره كيفيه أفتتاح أكاديمية رياضية",
+          "price": 30,
           "description": "نصائح وتوجيهات لإنشاء أكاديمية رياضية ناجحة"
         },
         {
           "id": 5,
-          "title": "محاضره برايفت كيف تكون وكيل لاعبين معتمد و طرق الاختبار و المعلومات",
-          "price": 50,
-          "description": "تعلم كل ما يخص وكالة اللاعبين"
+          "title": "استشاره عن وكلاء اللاعبين و التسويق الرياضي",
+          "price": 30,
+          "description": "معرفة كل ما يتعلق بوكالات اللاعبين والتسويق الرياضي"
         },
         {
           "id": 6,
-          "title": "محاضره الثقافه الاداريه الاحترافيه الرياضيه",
-          "price": 40,
-          "description": "تطوير المهارات الإدارية"
+          "title": "الثقافه الإداريه للإداري الرياضي",
+          "price": 30,
+          "description": "تطوير المهارات الإدارية للعاملين في المجال الرياضي"
+        },
+        {
+          "id": 7,
+          "title": "الحجز للتوقيع أو لحضور اجتماع رسمي للاعبين والمدربين المنضمين إلينا",
+          "price": "معفي من الرسوم",
+          "description": "خدمة مخصّصة للاعبين والمدربين المنضمين إلى شركتنا، تتيح لهم حجز موعد رسمي لتوقيع العقود أو حضور الاجتماعات التنظيمية مع فريقنا، لضمان بداية احترافية وتعاون ناجح."
         }
       ],
       "form": {
@@ -1632,7 +1689,7 @@
         "submit": "إرسال الطلب"
       },
       "contact": {
-        "address": "مكتب الكابتن أ. أحمد جابر أشكناني 🏢 أبراج المرقاب 24 – الدور الخامس 5️⃣",
+        "address": "العارضية , الكويت",
         "phone": 96597131223,
         "email": "info@ashkananisport.com",
         "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3479.528461938946!2d47.91852850000001!3d29.2961703!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf91ffebb1dda5%3A0x2b30b824da3bcbc4!2z2YXZg9iq2Kgg2YPYp9io2KrZhiDYo9it2YXYryDYo9i02YPZhtin2YbZig!5e0!3m2!1sen!2seg!4v1758130217501!5m2!1sen!2seg"
@@ -1706,13 +1763,13 @@
           "url": ""
         },
         {
-          "name": "بطولة عائلة اشكناني",
-          "logoUrl": "/images/ashkanani-tournament.jpg",
+          "name": "اللجنة الأولمبية الكويتية",
+          "logoUrl": "/images/partner2.jpg",
           "url": ""
         },
         {
-          "name": "مجموعة التوجيه القانونية",
-          "logoUrl": "/images/al-tawjeeh.jpg",
+          "name": "بطولة عائلة اشكناني",
+          "logoUrl": "/images/ashkanani-tournament.jpg",
           "url": ""
         },
         {
@@ -1726,8 +1783,38 @@
           "url": ""
         },
         {
+          "name": "Myology Academy",
+          "logoUrl": "/images/partner14.jpg",
+          "url": ""
+        },
+        {
+          "name": "Tigers Squad",
+          "logoUrl": "/images/partner15.jpg",
+          "url": ""
+        },
+        {
+          "name": "ACE Sports",
+          "logoUrl": "/images/partner7.jpg",
+          "url": ""
+        },
+        {
+          "name": "Star One Beach Soccer",
+          "logoUrl": "/images/partner10.jpg",
+          "url": ""
+        },
+        {
+          "name": "SAVE.",
+          "logoUrl": "/images/partner13.jpg",
+          "url": ""
+        },
+        {
           "name": "تيتانيوم",
           "logoUrl": "/images/titanium.jpg",
+          "url": ""
+        },
+        {
+          "name": "مجموعة التوجيه القانونية",
+          "logoUrl": "/images/al-tawjeeh.jpg",
           "url": ""
         },
         {
@@ -1746,8 +1833,13 @@
           "url": ""
         },
         {
-          "name": "البوم",
+          "name": "ألبوم",
           "logoUrl": "/images/albumii.jpg",
+          "url": ""
+        },
+        {
+          "name": "VS Vauntsquare",
+          "logoUrl": "/images/partner12.jpg",
           "url": ""
         },
         {
@@ -1761,18 +1853,33 @@
           "url": ""
         },
         {
-          "name": "VS",
-          "logoUrl": "/images/partner12.jpg",
+          "name": "Q8Boots",
+          "logoUrl": "/images/partner9.jpg",
           "url": ""
         },
         {
-          "name": "فلير",
+          "name": "فلير فتنس",
           "logoUrl": "/images/flare-fitness.jpg",
+          "url": ""
+        },
+        {
+          "name": "Star Academy",
+          "logoUrl": "/images/partner8.jpg",
           "url": ""
         },
         {
           "name": "كرايو",
           "logoUrl": "/images/cryo.jpg",
+          "url": ""
+        },
+        {
+          "name": "دايت",
+          "logoUrl": "/images/diet.jpg",
+          "url": ""
+        },
+        {
+          "name": "توسكانا كلينك",
+          "logoUrl": "/images/toscana-clinic.jpg",
           "url": ""
         },
         {
@@ -1783,11 +1890,6 @@
         {
           "name": "هوملي سبا",
           "logoUrl": "/images/homely-spa.jpg",
-          "url": ""
-        },
-        {
-          "name": "أكاديمية ستار",
-          "logoUrl": "/images/partner10.jpg",
           "url": ""
         }
       ]

@@ -396,6 +396,188 @@
     direction: rtl;
 }
 
+.montage-order-button,
+.montage-order-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 6px;
+    padding: 12px 20px;
+    background: var(--accent-color);
+    color: #111;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.montage-order-button {
+    margin-top: 16px;
+}
+
+.montage-order-button:hover,
+.montage-order-submit:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.montage-order-submit:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.montage-payment-notice {
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    max-width: 760px;
+    margin: 0 auto 24px;
+    padding: 18px;
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+}
+
+.montage-payment-notice p {
+    margin: 0;
+}
+
+.montage-payment-notice .montage-order-submit {
+    text-decoration: none;
+}
+
+.montage-order-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 16px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.82);
+}
+
+.montage-order-modal {
+    position: relative;
+    width: min(100%, 760px);
+    max-height: 94vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 32px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--primary-color);
+    color: white;
+    direction: inherit;
+}
+
+.montage-order-modal h2 {
+    margin: 0 48px 8px 0;
+    color: var(--accent-color);
+}
+
+.montage-order-intro {
+    margin-bottom: 22px;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.montage-order-form,
+.montage-order-fields {
+    display: grid;
+    gap: 16px;
+}
+
+.montage-order-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.montage-team-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.montage-order-form label {
+    display: grid;
+    gap: 7px;
+    color: white;
+    font-weight: 600;
+}
+
+.montage-order-form input:not([type="checkbox"]):not([type="file"]),
+.montage-order-form textarea,
+.montage-order-form input[type="file"],
+.montage-order-form select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font: inherit;
+}
+
+.montage-order-form input:focus,
+.montage-order-form textarea:focus,
+.montage-order-form select:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 1px;
+}
+
+.montage-order-form input[type="date"] {
+    color-scheme: dark;
+}
+
+.montage-order-form select {
+    color-scheme: dark;
+}
+
+.montage-order-form input[type="file"] {
+    padding: 9px;
+}
+
+.montage-order-form input[type="file"]::file-selector-button {
+    margin-inline-end: 10px;
+    padding: 7px 10px;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.montage-photo-field span {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.montage-photo-field .montage-photo-error {
+    color: #ff8c8c;
+}
+
+.montage-order-form .montage-logo-option {
+    display: flex;
+    grid-template-columns: none;
+    align-items: center;
+    gap: 10px;
+}
+
+.montage-logo-option input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-color);
+}
+
+.montage-order-submit {
+    width: 100%;
+    min-height: 48px;
+}
+
 [lang="en"] .services-modal-additional-details {
     text-align: left;
     direction: ltr;
@@ -468,5 +650,13 @@
     
     .services-modal-overlay {
         padding: 10px;
+    }
+
+    .montage-order-modal {
+        padding: 24px 18px;
+    }
+
+    .montage-order-fields {
+        grid-template-columns: 1fr;
     }
 }
