@@ -44,6 +44,17 @@ secrets in `VITE_*` variables or client-side source files. The payment
 credentials previously shared in chat were exposed; rotate them and use only
 replacement credentials in Vercel environment variables.
 
+Charge requests send both `Accept: application/json` and
+`Content-Type: application/json`; UPayments' [FAQ](https://developers.upayments.com/reference/faqs)
+identifies both as required to avoid charge API 401 responses. The charge
+request signs `timestamp + POST + charge + exact JSON body` with the API Secret.
+The [Add Charge OpenAPI](https://developers.upayments.com/reference/addcharge)
+defines `Authorization` as an API-key header; the [payment-status API](https://developers.upayments.com/reference/checkpaymentstatus)
+defines bearer authentication. Keep the corresponding endpoint-specific
+authorization format and use the actual API Key, not the encrypted key or
+Merchant ID. Failed UPayments responses are logged with only sanitized error
+fields, endpoint, stage, and HTTP status.
+
 Email notifications are sent from and to `Ashkananisport@gmail.com` by the
 Google Apps Script in [`google-apps-script/Code.gs`](./google-apps-script/Code.gs).
 Create a new Apps Script project while signed in to that Gmail account, paste

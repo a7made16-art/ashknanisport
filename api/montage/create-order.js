@@ -6,6 +6,7 @@ import {
   signMontageOrder,
   validateMontageOrder,
   validateRequestOrigin,
+  logUPaymentsFailure,
 } from '../../server/consultationPayments.js';
 import { isGmailNotificationConfigured } from '../../server/consultationEmail.js';
 
@@ -73,6 +74,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         Authorization: apiKey,
+        Accept: 'application/json',
         'Content-Type': 'application/json',
         'X-Timestamp': timestamp,
         'X-Signature': createUPaymentsSignature(apiSecret, timestamp, 'POST', 'charge', body),
@@ -81,8 +83,17 @@ export default async function handler(req, res) {
     });
 
     if (!response.ok) {
-      console.error('UPayments montage charge creation failed:', response.status, await response.text());
-      return res.status(502).json({ error: 'Could not start UPayments checkout' });
+      await logUPaymentsFailure('montage charge creation', 'POST /api/v1/charge', response);
+      if (response.status === 401) {
+        return res.status(502).json({
+          code: 'UPAYMENTS_AUTH_FAILED',
+          error: 'Payment provider authentication failed. Verify the Production API credentials.',
+        });
+      }
+      return res.status(502).json({
+        code: 'UPAYMENTS_CHARGE_FAILED',
+        error: 'Could not start UPayments checkout',
+      });
     }
 
     const result = await response.json();

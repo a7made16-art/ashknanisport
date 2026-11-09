@@ -342,9 +342,9 @@ export function verifySignedMontageOrder(token) {
 }
 
 export function getUPaymentsConfig() {
-  const mode = process.env.UPAYMENTS_MODE;
-  const apiKey = process.env.UPAYMENTS_API_KEY;
-  const apiSecret = process.env.UPAYMENTS_API_SECRET;
+  const mode = process.env.UPAYMENTS_MODE?.trim();
+  const apiKey = process.env.UPAYMENTS_API_KEY?.trim();
+  const apiSecret = process.env.UPAYMENTS_API_SECRET?.trim();
   if (mode !== 'sandbox' && mode !== 'live') {
     throw new Error('UPAYMENTS_MODE must be set to sandbox or live');
   }
@@ -385,6 +385,44 @@ export function createUPaymentsSignature(apiSecret, timestamp, method, path, bod
     .digest('base64');
 }
 
+function sanitizeUPaymentsErrorValue(value) {
+  return String(value)
+    .replace(/\bBearer\s+\S+/gi, 'Bearer [REDACTED]')
+    .replace(/\b(api[_-]?key|secret|signature|token)\s*[:=]\s*["']?[^,\s"'}]+/gi, '$1=[REDACTED]')
+    .replace(/\b[A-Za-z0-9_-]{32,}\b/g, '[REDACTED]')
+    .replace(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/g, '[EMAIL]')
+    .slice(0, 300);
+}
+
+export async function logUPaymentsFailure(stage, endpoint, response) {
+  let safeResponse = 'Non-JSON response body omitted';
+  try {
+    const body = await response.text();
+    const parsed = JSON.parse(body);
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+      const details = {};
+      for (const key of ['message', 'error', 'code']) {
+        const value = parsed[key];
+        if (typeof value === 'string' || typeof value === 'number') {
+          details[key] = sanitizeUPaymentsErrorValue(value);
+        }
+      }
+      safeResponse = Object.keys(details).length > 0
+        ? JSON.stringify(details)
+        : 'No safe error fields in response body';
+    }
+  } catch {
+    safeResponse = 'Response body unavailable or not valid JSON';
+  }
+
+  console.error('UPayments request failed:', {
+    stage,
+    endpoint,
+    status: response.status,
+    response: safeResponse,
+  });
+}
+
 export function getCloudinaryConfig() {
   const cloudName = process.env.CLOUDINARY_CLOUD_NAME || defaultCloudinaryCloudName;
   const apiKey = process.env.CLOUDINARY_API_KEY || defaultCloudinaryApiKey;
@@ -416,12 +454,18 @@ export async function getUPaymentsPayment(trackId) {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${apiKey}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
       'X-Timestamp': timestamp,
       'X-Signature': createUPaymentsSignature(apiSecret, timestamp, 'GET', path),
     },
   });
   if (!response.ok) {
-    console.error('UPayments status lookup failed:', response.status);
+    await logUPaymentsFailure(
+      'payment status lookup',
+      'GET /api/v1/get-payment-status/:track_id',
+      response,
+    );
     throw new Error('UPayments could not verify the payment');
   }
   const data = await response.json();

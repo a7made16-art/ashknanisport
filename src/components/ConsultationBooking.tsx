@@ -98,6 +98,7 @@ const [formData, setFormData] = useState({
       paymentCancelled: 'تم إلغاء الدفع. لم يتم تأكيد الحجز.',
       paymentError: 'تعذر تأكيد الدفع. حدّث الصفحة لإعادة المحاولة أو تواصل معنا.',
       checkoutFailed: 'تعذر بدء الدفع الآن. يرجى المحاولة لاحقًا أو التواصل معنا.',
+      paymentAuthFailed: 'تعذر التحقق من إعدادات الدفع لدى الشركة. يرجى التواصل معنا.',
       confirmingPayment: 'جاري تأكيد الدفع وإرسال تفاصيل الحجز...',
       whatsappMessage: (name: string, phone: string, serviceTitle: string, priceText: string, date: string, time: string) => 
         `مرحباً، أود حجز استشارة مع الكابتن أحمد جابر أشكناني\n\nالاسم: ${name}\nرقم الهاتف: ${phone}\nنوع الاستشارة: ${serviceTitle}\nالسعر: ${priceText}\nالتاريخ: ${date}\nالوقت: ${time}\n\nالعنوان: ${content.contact.address}\nرابط الخريطة: https://maps.app.goo.gl/CapKa1grxPnRLe9b9?g_st=ic`,
@@ -139,6 +140,7 @@ const [formData, setFormData] = useState({
       paymentCancelled: 'Payment was cancelled. The appointment is not confirmed.',
       paymentError: 'Could not confirm payment. Refresh to retry or contact us.',
       checkoutFailed: 'Could not start checkout. Please try again later or contact us.',
+      paymentAuthFailed: 'The company payment configuration could not be authenticated. Please contact us.',
       confirmingPayment: 'Confirming payment and sending booking details...',
       whatsappMessage: (name: string, phone: string, serviceTitle: string, priceText: string, date: string, time: string) => 
         `Hello, I would like to book a consultation with Captain Ahmed Jaber Ashkanani\n\nName: ${name}\nPhone: ${phone}\nConsultation Type: ${serviceTitle}\nPrice: ${priceText}\nDate: ${date}\nTime: ${time}\n\nAddress: ${content.contact.address}\nMap Link: https://maps.app.goo.gl/CapKa1grxPnRLe9b9?g_st=ic`,
@@ -445,7 +447,9 @@ const processBooking = async () => {
     });
     const orderData = await orderResponse.json();
     if (!orderResponse.ok) {
-      throw new Error(typeof orderData.error === 'string' ? orderData.error : 'Could not start checkout');
+      throw new Error(orderData.code === 'UPAYMENTS_AUTH_FAILED'
+        ? 'UPAYMENTS_AUTH_FAILED'
+        : 'Could not start checkout');
     }
     if (
       typeof orderData.checkoutUrl !== 'string' ||
@@ -460,7 +464,9 @@ const processBooking = async () => {
     console.error('Consultation checkout failed:', error);
     setBookingStatus({ 
       type: 'error', 
-      message: t.checkoutFailed
+      message: error instanceof Error && error.message === 'UPAYMENTS_AUTH_FAILED'
+        ? t.paymentAuthFailed
+        : t.checkoutFailed
     });
   }
 };

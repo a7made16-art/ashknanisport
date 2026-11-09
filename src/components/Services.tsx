@@ -241,7 +241,11 @@ const Services = ({ content, language }) => {
                 }),
             });
             const result = await response.json();
-            if (!response.ok) throw new Error(result.error || 'Could not start payment');
+            if (!response.ok) {
+                throw new Error(result.code === 'UPAYMENTS_AUTH_FAILED'
+                    ? 'UPAYMENTS_AUTH_FAILED'
+                    : 'Could not start payment');
+            }
             if (
                 typeof result.checkoutUrl !== 'string'
                 || typeof result.orderToken !== 'string'
@@ -252,9 +256,14 @@ const Services = ({ content, language }) => {
             window.location.assign(result.checkoutUrl);
         } catch (error) {
             console.error('Montage checkout failed:', error);
-            setOrderSubmitError(language === 'ar'
-                ? 'تعذر رفع الصور أو بدء الدفع. قد تكون بعض الصور رُفعت بالفعل؛ يرجى المحاولة مجددًا.'
-                : 'Could not upload the photos or start payment. Some photos may already have uploaded; please try again.');
+            const authenticationFailed = error instanceof Error && error.message === 'UPAYMENTS_AUTH_FAILED';
+            setOrderSubmitError(authenticationFailed
+                ? language === 'ar'
+                    ? 'تعذر التحقق من إعدادات الدفع لدى الشركة. يرجى التواصل معنا.'
+                    : 'The company payment configuration could not be authenticated. Please contact us.'
+                : language === 'ar'
+                    ? 'تعذر رفع الصور أو بدء الدفع. قد تكون بعض الصور رُفعت بالفعل؛ يرجى المحاولة مجددًا.'
+                    : 'Could not upload the photos or start payment. Some photos may already have uploaded; please try again.');
             setIsSubmittingOrder(false);
         }
     };
