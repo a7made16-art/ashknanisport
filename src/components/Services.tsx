@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FaFutbol, FaBullhorn, FaHandshake, FaAppleAlt, FaGavel, FaGlobe, FaBrain, FaDumbbell, FaCamera, FaTimes, FaPlay, FaVolumeUp, FaVolumeMute, FaPause, FaVideo } from 'react-icons/fa';
+import { FaFutbol, FaBullhorn, FaHandshake, FaAppleAlt, FaGavel, FaGlobe, FaBrain, FaDumbbell, FaCamera, FaCloudUploadAlt, FaTimes, FaPlay, FaVolumeUp, FaVolumeMute, FaPause, FaVideo } from 'react-icons/fa';
 
 const iconMap = {
     FaFutbol: <FaFutbol />,
@@ -28,7 +28,7 @@ const Services = ({ content, language }) => {
         includeLogo: true,
         notes: '',
     });
-    const [matchPhotos, setMatchPhotos] = useState<File[]>([]);
+    const [matchPhotos, setMatchPhotos] = useState<Array<File | null>>([null, null, null]);
     const [photoError, setPhotoError] = useState('');
     const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
     const [orderSubmitError, setOrderSubmitError] = useState('');
@@ -112,17 +112,28 @@ const Services = ({ content, language }) => {
         }));
     };
 
-    const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedPhotos: File[] = Array.from(event.currentTarget.files || []);
-        setMatchPhotos(selectedPhotos);
-        setPhotoError(
-            selectedPhotos.length === 3 &&
-                selectedPhotos.every((photo) => photo.type.startsWith('image/') && photo.size <= 10 * 1024 * 1024)
-                ? ''
-                : language === 'ar'
-                    ? 'اختاري 3 صور بالضبط، حجم كل صورة لا يتجاوز 10 ميجابايت.'
-                    : 'Choose exactly 3 images, each no larger than 10 MB.'
-        );
+    const handlePhotoChange = (photoIndex: number, event: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedPhoto = event.currentTarget.files?.[0];
+        event.currentTarget.value = '';
+        if (!selectedPhoto) return;
+        if (!selectedPhoto.type.startsWith('image/') || selectedPhoto.size > 10 * 1024 * 1024) {
+            setPhotoError(language === 'ar'
+                ? 'اختاري صورة صالحة، ويجب ألا يتجاوز حجمها 10 ميجابايت.'
+                : 'Choose a valid image no larger than 10 MB.');
+            return;
+        }
+
+        setMatchPhotos((current) => current.map((photo, index) =>
+            index === photoIndex ? selectedPhoto : photo
+        ));
+        setPhotoError('');
+    };
+
+    const removeMatchPhoto = (photoIndex: number) => {
+        setMatchPhotos((current) => current.map((photo, index) =>
+            index === photoIndex ? null : photo
+        ));
+        setPhotoError('');
     };
 
     const createMontageWhatsAppUrl = (order) => {
@@ -173,14 +184,12 @@ const Services = ({ content, language }) => {
 
     const handleMontageOrderSubmit = async (event) => {
         event.preventDefault();
-        if (
-            matchPhotos.length !== 3 ||
-            matchPhotos.some((photo) => !photo.type.startsWith('image/') || photo.size > 10 * 1024 * 1024)
-        ) {
+        const selectedPhotos = matchPhotos.filter((photo): photo is File => photo !== null);
+        if (selectedPhotos.length !== 3) {
             setPhotoError(
                 language === 'ar'
-                    ? 'اختاري 3 صور بالضبط، حجم كل صورة لا يتجاوز 10 ميجابايت.'
-                    : 'Choose exactly 3 images, each no larger than 10 MB.'
+                    ? `أكملي اختيار الصور الثلاث. اخترتِ ${selectedPhotos.length} من 3.`
+                    : `Choose all 3 photos. You have selected ${selectedPhotos.length} of 3.`
             );
             return;
         }
@@ -189,7 +198,7 @@ const Services = ({ content, language }) => {
         setOrderSubmitError('');
         try {
             const uploadBatchId = crypto.randomUUID();
-            const photos = await Promise.all(matchPhotos.map(async (photo, imageIndex) => {
+            const photos = await Promise.all(selectedPhotos.map(async (photo, imageIndex) => {
                 const signatureResponse = await fetch('/api/montage/upload-signature', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -715,25 +724,75 @@ const Services = ({ content, language }) => {
                                     </React.Fragment>
                                 ))}
                             </div>
-                            <label className="montage-photo-field">
-                                {language === 'ar' ? 'اختر 3 صور من الملعب' : 'Choose 3 photos from the match'}
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    multiple
-                                    onChange={handlePhotoChange}
-                                    aria-describedby="montage-photo-help"
-                                    required
-                                />
-                                <span id="montage-photo-help">
-                                    {matchPhotos.length === 3
-                                        ? matchPhotos.map((photo) => photo.name).join('، ')
-                                        : language === 'ar'
-                                            ? `تم اختيار ${matchPhotos.length} من 3 صور (حد أقصى 10 ميجابايت للصورة)`
-                                            : `${matchPhotos.length} of 3 photos selected (10 MB max each)`}
+                            <div className="montage-photo-field">
+                                <div className="montage-photo-heading">
+                                    <span className="montage-photo-title">
+                                        {language === 'ar' ? 'صور المباراة' : 'Match photos'}
+                                    </span>
+                                    <span id="montage-photo-help" className="montage-photo-count">
+                                        {language === 'ar'
+                                            ? `اختاري الصور واحدة تلو الأخرى — ${matchPhotos.filter(Boolean).length} من 3`
+                                            : `Add photos one at a time — ${matchPhotos.filter(Boolean).length} of 3`}
+                                    </span>
+                                </div>
+                                <div className="montage-photo-grid">
+                                    {matchPhotos.map((photo, index) => {
+                                        const inputId = `montage-photo-${index}`;
+                                        return (
+                                            <div className={`montage-photo-slot${photo ? ' is-selected' : ''}`} key={inputId}>
+                                                <input
+                                                    id={inputId}
+                                                    className="montage-photo-input"
+                                                    type="file"
+                                                    accept="image/*"
+                                                    onChange={(event) => handlePhotoChange(index, event)}
+                                                    aria-describedby="montage-photo-help"
+                                                />
+                                                <label className="montage-photo-picker" htmlFor={inputId}>
+                                                    {photo ? (
+                                                        <>
+                                                            <span className="montage-photo-selected-icon"><FaCamera /></span>
+                                                            <span className="montage-photo-slot-title">
+                                                                {language === 'ar' ? `الصورة ${index + 1}` : `Photo ${index + 1}`}
+                                                            </span>
+                                                            <span className="montage-photo-name" title={photo.name}>{photo.name}</span>
+                                                            <span className="montage-photo-action">
+                                                                {language === 'ar' ? 'اضغطي لتغييرها' : 'Click to replace'}
+                                                            </span>
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <span className="montage-photo-upload-icon" aria-hidden="true"><FaCloudUploadAlt /></span>
+                                                            <span className="montage-photo-slot-title">
+                                                                {language === 'ar' ? `إضافة الصورة ${index + 1}` : `Add photo ${index + 1}`}
+                                                            </span>
+                                                            <span className="montage-photo-action">
+                                                                {language === 'ar' ? 'اختاري صورة من جهازك' : 'Choose from your device'}
+                                                            </span>
+                                                        </>
+                                                    )}
+                                                </label>
+                                                {photo && (
+                                                    <button
+                                                        className="montage-photo-remove"
+                                                        type="button"
+                                                        aria-label={language === 'ar' ? `حذف الصورة ${index + 1}` : `Remove photo ${index + 1}`}
+                                                        onClick={() => removeMatchPhoto(index)}
+                                                    >
+                                                        <FaTimes aria-hidden="true" />
+                                                    </button>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                                <span className="montage-photo-hint">
+                                    {language === 'ar'
+                                        ? 'الحد الأقصى لحجم كل صورة 10 ميجابايت.'
+                                        : 'Maximum size: 10 MB per photo.'}
                                 </span>
-                                {photoError && <span className="montage-photo-error">{photoError}</span>}
-                            </label>
+                                {photoError && <span className="montage-photo-error" role="alert">{photoError}</span>}
+                            </div>
                             <label className="montage-logo-option">
                                 <input
                                     type="checkbox"

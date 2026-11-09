@@ -511,7 +511,6 @@
 
 .montage-order-form input:not([type="checkbox"]):not([type="file"]),
 .montage-order-form textarea,
-.montage-order-form input[type="file"],
 .montage-order-form select {
     width: 100%;
     box-sizing: border-box;
@@ -538,22 +537,133 @@
     color-scheme: dark;
 }
 
-.montage-order-form input[type="file"] {
-    padding: 9px;
+.montage-photo-field {
+    display: grid;
+    gap: 12px;
 }
 
-.montage-order-form input[type="file"]::file-selector-button {
-    margin-inline-end: 10px;
-    padding: 7px 10px;
-    border: 0;
-    border-radius: 4px;
-    cursor: pointer;
+.montage-photo-heading {
+    display: grid;
+    gap: 4px;
 }
 
-.montage-photo-field span {
+.montage-photo-field .montage-photo-title {
+    color: white;
+    font-weight: 600;
+}
+
+.montage-photo-field .montage-photo-count,
+.montage-photo-field .montage-photo-hint {
     color: var(--text-color);
     font-size: 0.9rem;
     font-weight: 400;
+}
+
+.montage-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.montage-photo-slot {
+    position: relative;
+    min-width: 0;
+}
+
+.montage-photo-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+.montage-photo-picker {
+    display: flex !important;
+    min-height: 148px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    gap: 8px !important;
+    padding: 18px 12px;
+    overflow: hidden;
+    border: 1px dashed rgba(212, 175, 55, 0.55);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.035);
+    color: var(--text-color) !important;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.montage-photo-picker:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+    background: rgba(212, 175, 55, 0.08);
+}
+
+.montage-photo-input:focus-visible + .montage-photo-picker {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
+}
+
+.montage-photo-slot.is-selected .montage-photo-picker {
+    border-style: solid;
+    border-color: rgba(212, 175, 55, 0.8);
+    background: rgba(212, 175, 55, 0.07);
+}
+
+.montage-photo-upload-icon,
+.montage-photo-selected-icon {
+    color: var(--accent-color);
+    font-size: 1.8rem;
+}
+
+.montage-photo-slot-title {
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.montage-photo-field .montage-photo-name {
+    width: 100%;
+    overflow: hidden;
+    color: var(--text-color);
+    font-size: 0.78rem;
+    font-weight: 400;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.montage-photo-field .montage-photo-action {
+    color: var(--text-color);
+    font-size: 0.78rem;
+    font-weight: 400;
+}
+
+.montage-photo-remove {
+    position: absolute;
+    top: 7px;
+    inset-inline-end: 7px;
+    z-index: 1;
+    display: grid;
+    width: 27px;
+    height: 27px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    background: rgba(17, 20, 25, 0.88);
+    color: white;
+    cursor: pointer;
+}
+
+.montage-photo-remove:hover {
+    border-color: #ff8c8c;
+    color: #ff8c8c;
 }
 
 .montage-photo-field .montage-photo-error {
@@ -658,5 +768,22 @@
 
     .montage-order-fields {
         grid-template-columns: 1fr;
+    }
+
+    .montage-photo-grid {
+        gap: 8px;
+    }
+
+    .montage-photo-picker {
+        min-height: 128px;
+        padding: 14px 8px;
+    }
+
+    .montage-photo-slot-title {
+        font-size: 0.84rem;
+    }
+
+    .montage-photo-field .montage-photo-action {
+        font-size: 0.72rem;
     }
 }
