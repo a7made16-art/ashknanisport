@@ -73,7 +73,7 @@ export default async function handler(req, res) {
     const response = await fetch(`${apiBase}/charge`, {
       method: 'POST',
       headers: {
-        Authorization: apiKey,
+        Authorization: `Bearer ${apiKey}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
         'X-Timestamp': timestamp,
