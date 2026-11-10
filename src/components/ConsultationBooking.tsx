@@ -1,5 +1,5 @@
 // src/components/ConsultationBooking.tsx
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Language } from '../types';
@@ -28,7 +28,6 @@ interface ConsultationBookingProps {
       address: string;
       phone: number;
       email: string;
-      mapUrl: string;
       mapEmbedUrl: string;
     };
   };
@@ -77,14 +76,10 @@ const [formData, setFormData] = useState({
     message: ''
   });
 
-  const [paidBooking, setPaidBooking] = useState<{ whatsappUrl: string } | null>(null);
-  const paymentReturnHandled = useRef(false);
-
   // النصوص المترجمة حسب اللغة
   const translations = {
     ar: {
-      officeTitle: 'مكتب الكابتن أ. أحمد جابر أشكناني',
-      officeMapLink: '📌 موقع المكتب على خرائط Google',
+      officeTitle: 'مكتب الكابتن أحمد جابر أشكناني',
       errorName: 'الرجاء إدخال الاسم',
       errorPhone: 'الرجاء إدخال رقم الهاتف',
       errorPhoneInvalid: 'رقم الهاتف غير صحيح',
@@ -94,18 +89,9 @@ const [formData, setFormData] = useState({
       errorTime: 'الرجاء اختيار الوقت',
       checkingAvailability: 'جاري التحقق من توفر الموعد...',
       slotBooked: 'الميعاد محجوز بالفعل، اختر وقت آخر.',
-      bookingSuccess: 'تم تأكيد الدفع وحفظ تفاصيل الحجز لدى الشركة.',
-      freeBookingSuccess: 'تم فتح واتساب لإتمام الحجز المجاني.',
-      payNow: 'المتابعة للدفع الإلكتروني',
-      paymentCancelled: 'تم إلغاء الدفع. لم يتم تأكيد الحجز.',
-      paymentError: 'تعذر تأكيد الدفع. حدّث الصفحة لإعادة المحاولة أو تواصل معنا.',
-      checkoutFailed: 'تعذر بدء الدفع الآن. يرجى المحاولة لاحقًا أو التواصل معنا.',
-      paymentAuthFailed: 'تعذر التحقق من إعدادات الدفع لدى الشركة. يرجى التواصل معنا.',
-      confirmingPayment: 'جاري تأكيد الدفع وحفظ تفاصيل الحجز...',
-      bookingSuccessEmailFailed: 'تم تأكيد الدفع وحفظ الحجز، لكن تعذر إرسال إشعار للشركة. يرجى التواصل معنا.',
-      bookingSaveFailed: (reference: string) => `تم تأكيد الدفع لكن تعذر حفظ الحجز لدى الشركة. رقم الطلب: ${reference}. يرجى التواصل معنا.`,
+      bookingSuccess: 'تم فتح واتساب لإتمام الحجز.',
       whatsappMessage: (name: string, phone: string, serviceTitle: string, priceText: string, date: string, time: string) => 
-        `مرحباً، أود حجز استشارة مع الكابتن أحمد جابر أشكناني\n\nالاسم: ${name}\nرقم الهاتف: ${phone}\nنوع الاستشارة: ${serviceTitle}\nالسعر: ${priceText}\nالتاريخ: ${date}\nالوقت: ${time}\n\nالعنوان: ${content.contact.address}\nرابط الخريطة: ${content.contact.mapUrl}`,
+        `مرحباً، أود حجز استشارة مع الكابتن أحمد جابر أشكناني\n\nالاسم: ${name}\nرقم الهاتف: ${phone}\nنوع الاستشارة: ${serviceTitle}\nالسعر: ${priceText}\nالتاريخ: ${date}\nالوقت: ${time}\n\nالعنوان: ${content.contact.address}\nرابط الخريطة: https://maps.app.goo.gl/CapKa1grxPnRLe9b9?g_st=ic`,
       whatsappButton: 'حجز عبر واتساب',
       mapPlaceholder: 'معلومات الخريطة غير متوفرة',
       selectService: 'اختر الاستشارة',
@@ -129,7 +115,6 @@ const [formData, setFormData] = useState({
     },
     en: {
       officeTitle: 'Captain Ahmed Jaber Ashkanani Office',
-      officeMapLink: '📌 View office on Google Maps',
       errorName: 'Please enter your name',
       errorPhone: 'Please enter your phone number',
       errorPhoneInvalid: 'Invalid phone number',
@@ -139,18 +124,9 @@ const [formData, setFormData] = useState({
       errorTime: 'Please select a time',
       checkingAvailability: 'Checking appointment availability...',
       slotBooked: 'This time slot is already booked. Please choose another.',
-      bookingSuccess: 'Payment confirmed. The booking details have been saved for the company.',
-      freeBookingSuccess: 'Opening WhatsApp to complete the free booking.',
-      payNow: 'Continue to secure checkout',
-      paymentCancelled: 'Payment was cancelled. The appointment is not confirmed.',
-      paymentError: 'Could not confirm payment. Refresh to retry or contact us.',
-      checkoutFailed: 'Could not start checkout. Please try again later or contact us.',
-      paymentAuthFailed: 'The company payment configuration could not be authenticated. Please contact us.',
-      confirmingPayment: 'Confirming payment and saving the booking details...',
-      bookingSuccessEmailFailed: 'Payment confirmed and booking saved, but the company notification email could not be sent. Please contact us.',
-      bookingSaveFailed: (reference: string) => `Payment confirmed, but the booking could not be saved for the company. Order reference: ${reference}. Please contact us.`,
+      bookingSuccess: 'Opening WhatsApp to complete your booking.',
       whatsappMessage: (name: string, phone: string, serviceTitle: string, priceText: string, date: string, time: string) => 
-        `Hello, I would like to book a consultation with Captain Ahmed Jaber Ashkanani\n\nName: ${name}\nPhone: ${phone}\nConsultation Type: ${serviceTitle}\nPrice: ${priceText}\nDate: ${date}\nTime: ${time}\n\nAddress: ${content.contact.address}\nMap Link: ${content.contact.mapUrl}`,
+        `Hello, I would like to book a consultation with Captain Ahmed Jaber Ashkanani\n\nName: ${name}\nPhone: ${phone}\nConsultation Type: ${serviceTitle}\nPrice: ${priceText}\nDate: ${date}\nTime: ${time}\n\nAddress: ${content.contact.address}\nMap Link: https://maps.app.goo.gl/CapKa1grxPnRLe9b9?g_st=ic`,
       whatsappButton: 'Book via WhatsApp',
       mapPlaceholder: 'Map information is unavailable',
       selectService: 'Select Consultation',
@@ -337,21 +313,14 @@ const isDayDisabled = (date: Date) => {
     return isValid;
   };
 
-const createWhatsAppLink = (booking: {
-  name: string;
-  phone: string;
-  service: string | number;
-  date: Date | string;
-  time: string;
-}) => {
+// تحسين دالة إنشاء رابط الواتساب
+const createWhatsAppLink = () => {
   const phoneNumber = "96597131223";
-  const selectedService = content.services.find(s => s.id === Number(booking.service));
-  const selectedDate = booking.date instanceof Date
-    ? booking.date
-    : new Date(`${booking.date}T00:00:00`);
-  const day = selectedDate.getDate();
-  const month = selectedDate.getMonth() + 1;
-  const year = selectedDate.getFullYear();
+  const selectedService = formData.service ? content.services.find(s => s.id === parseInt(formData.service)) : null;
+  
+  const day = formData.date.getDate();
+  const month = formData.date.getMonth() + 1;
+  const year = formData.date.getFullYear();
   
   const formattedDate = language === 'ar' 
     ? `${day}/${month}/${year}` 
@@ -369,12 +338,12 @@ const createWhatsAppLink = (booking: {
   }
   
   const message = t.whatsappMessage(
-    booking.name,
-    booking.phone,
+    formData.name,
+    formData.phone,
     selectedService ? selectedService.title : '',
     priceText,
     formattedDate,
-    booking.time
+    formData.time
   );
   
   // تشفير الرسالة بشكل متوافق مع iPhone
@@ -390,15 +359,13 @@ const createWhatsAppLink = (booking: {
   return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 };
 
+// تعديل دالة processBooking لتحسين التوافق مع iPhone
 const processBooking = async () => {
   if (!validateForm()) return;
 
-  setPaidBooking(null);
   setBookingStatus({ type: 'checking', message: t.checkingAvailability });
 
-  const selectedService = content.services.find(s => s.id === Number(formData.service));
-  if (!selectedService || !formData.date) return;
-
+  const selectedService = content.services.find(s => s.id === parseInt(formData.service));
   const startDateTime = new Date(formData.date);
   const timeParts = formData.time.match(/\d+/g);
   if (timeParts) {
@@ -427,137 +394,65 @@ const processBooking = async () => {
       }),
     });
 
-    if (!response.ok) throw new Error('Availability check failed');
     const data = await response.json();
-    if (!data.available) {
+    if (data.available) {
+      setBookingStatus({ type: 'success', message: t.bookingSuccess });
+      
+      // إنشاء الرابط
+      const link = createWhatsAppLink();
+      
+      // محاولة فتح الواتساب بطرق مختلفة للتوافق مع iPhone
+      try {
+        // الطريقة الأولى: استخدام window.location.href (الأفضل لـ iPhone)
+        window.location.href = link;
+        
+        // الطريقة الاحتياطية: إذا لم يفتح خلال 500ms
+        setTimeout(() => {
+          // إنشاء رابط وهمي والنقر عليه
+          const a = document.createElement('a');
+          a.href = link;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, 100);
+      } catch (error) {
+        console.error('Failed to open WhatsApp:', error);
+        // الحل الأخير: توجيه المستخدم يدوياً
+        alert(language === 'ar' 
+          ? 'يرجى فتح الواتساب يدوياً وإرسال الرسالة التالية:\n\n' + 
+            t.whatsappMessage(
+              formData.name,
+              formData.phone,
+              selectedService ? selectedService.title : '',
+              selectedService ? (typeof selectedService.price === 'number' ? `${selectedService.price} دينار كويتي` : selectedService.price) : '',
+              `${formData.date.getDate()}/${formData.date.getMonth() + 1}/${formData.date.getFullYear()}`,
+              formData.time
+            )
+          : 'Please manually open WhatsApp and send the following message:\n\n' + 
+            t.whatsappMessage(
+              formData.name,
+              formData.phone,
+              selectedService ? selectedService.title : '',
+              selectedService ? (typeof selectedService.price === 'number' ? `${selectedService.price} KWD` : selectedService.price) : '',
+              `${formData.date.getMonth() + 1}/${formData.date.getDate()}/${formData.date.getFullYear()}`,
+              formData.time
+            )
+        );
+      }
+    } else {
       setBookingStatus({ type: 'error', message: t.slotBooked });
-      return;
     }
-
-    if (Number(selectedService.price) === 0 || Number.isNaN(Number(selectedService.price))) {
-      setBookingStatus({ type: 'success', message: t.freeBookingSuccess });
-      window.location.href = createWhatsAppLink(formData);
-      return;
-    }
-
-    const orderResponse = await fetch('/api/consultations/create-order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: formData.name.trim(),
-        phone: formData.phone.trim(),
-        serviceId: Number(formData.service),
-        date: `${formData.date.getFullYear()}-${String(formData.date.getMonth() + 1).padStart(2, '0')}-${String(formData.date.getDate()).padStart(2, '0')}`,
-        time: formData.time,
-        language,
-      }),
-    });
-    const orderData = await orderResponse.json();
-    if (!orderResponse.ok) {
-      throw new Error(orderData.code === 'UPAYMENTS_AUTH_FAILED'
-        ? 'UPAYMENTS_AUTH_FAILED'
-        : 'Could not start checkout');
-    }
-    if (
-      typeof orderData.checkoutUrl !== 'string' ||
-      typeof orderData.bookingToken !== 'string' ||
-      typeof orderData.reference !== 'string'
-    ) {
-      throw new Error('UPayments returned an invalid checkout response');
-    }
-    sessionStorage.setItem(`consultation-booking:${orderData.reference}`, orderData.bookingToken);
-    window.location.assign(orderData.checkoutUrl);
   } catch (error) {
-    console.error('Consultation checkout failed:', error);
     setBookingStatus({ 
       type: 'error', 
-      message: error instanceof Error && error.message === 'UPAYMENTS_AUTH_FAILED'
-        ? t.paymentAuthFailed
-        : t.checkoutFailed
+      message: language === 'ar' 
+        ? 'حدث خطأ أثناء التحقق من التوفر. يرجى المحاولة مرة أخرى.' 
+        : 'An error occurred while checking availability. Please try again.'
     });
   }
 };
-
-useEffect(() => {
-  const params = new URLSearchParams(window.location.search);
-  const paymentState = params.get('consultationPayment');
-  const reference = params.get('ref');
-
-  if (paymentState === 'cancelled') {
-    paymentReturnHandled.current = true;
-    if (reference) sessionStorage.removeItem(`consultation-booking:${reference}`);
-    window.history.replaceState({}, '', window.location.pathname);
-    setBookingStatus({ type: 'error', message: t.paymentCancelled });
-    return;
-  }
-  if (paymentState !== 'success' || paymentReturnHandled.current) return;
-  paymentReturnHandled.current = true;
-
-  const trackId = params.get('track_id');
-  const bookingToken = reference
-    ? sessionStorage.getItem(`consultation-booking:${reference}`)
-    : null;
-  if (!trackId || !reference || !bookingToken) {
-    setBookingStatus({ type: 'error', message: t.paymentError });
-    return;
-  }
-
-  setBookingStatus({ type: 'checking', message: t.confirmingPayment });
-  void (async () => {
-    try {
-      let verifiedBooking: {
-        name: string;
-        phone: string;
-        serviceId: number;
-        date: string;
-        time: string;
-      } | null = null;
-      let orderSaved = false;
-      let notificationSent = true;
-      for (let attempt = 0; attempt < 3; attempt += 1) {
-        const response = await fetch('/api/consultations/verify-payment', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ trackId, reference, bookingToken }),
-        });
-        const result = await response.json();
-        if (response.status === 202 && result.pending === true && attempt < 2) {
-          await new Promise((resolve) => window.setTimeout(resolve, 1200 * (attempt + 1)));
-          continue;
-        }
-        if (!response.ok || result.paid !== true || !result.booking) {
-          throw new Error(typeof result.error === 'string' ? result.error : 'Payment confirmation failed');
-        }
-        verifiedBooking = result.booking;
-        orderSaved = result.orderSaved === true;
-        notificationSent = result.notificationSent !== false;
-        break;
-      }
-
-      if (!verifiedBooking) throw new Error('Payment confirmation is still pending');
-      setPaidBooking({
-        whatsappUrl: createWhatsAppLink({
-          name: verifiedBooking.name,
-          phone: verifiedBooking.phone,
-          service: verifiedBooking.serviceId,
-          date: verifiedBooking.date,
-          time: verifiedBooking.time,
-        }),
-      });
-      setBookingStatus({
-        type: orderSaved ? 'success' : 'error',
-        message: !orderSaved
-          ? t.bookingSaveFailed(reference)
-          : notificationSent ? t.bookingSuccess : t.bookingSuccessEmailFailed,
-      });
-      sessionStorage.removeItem(`consultation-booking:${reference}`);
-      window.history.replaceState({}, '', window.location.pathname);
-    } catch (error) {
-      console.error('Consultation payment confirmation failed:', error);
-      setBookingStatus({ type: 'error', message: t.paymentError });
-    }
-  })();
-}, [language, t]);
 
   // دالة لتحويل التاريخ إلى صيغة ISO مع الحفاظ على توقيت الكويت
   function toKuwaitLocalISOString(date: Date) {
@@ -582,6 +477,12 @@ useEffect(() => {
     await processBooking();
   };
 
+  // دالة للتعامل مع النقر على رابط الواتساب
+  const handleWhatsAppClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    await processBooking();
+  };
+
   return (
     <section className="section consultation-booking" id="consultation-booking">
       <div className="container">
@@ -593,14 +494,6 @@ useEffect(() => {
             <div className="office-info">
               <h3>{t.officeTitle}</h3>
               <p className="office-address">{content.contact.address}</p>
-              <a
-                className="office-map-link"
-                href={content.contact.mapUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t.officeMapLink}
-              </a>
               <p>{content.workingDays}</p>
               <p>{content.workingHours}</p>
             </div>
@@ -731,26 +624,15 @@ useEffect(() => {
               </div>
               
               <div className="form-actions">
-                {paidBooking ? (
-                  <a
-                    href={paidBooking.whatsappUrl}
-                    className="whatsapp-btn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <i className="fab fa-whatsapp"></i> {t.whatsappButton}
-                  </a>
-                ) : (
-                  <button
-                    type="submit"
-                    className="whatsapp-btn"
-                    disabled={bookingStatus.type === 'checking'}
-                  >
-                    {formData.service && Number(content.services.find(service => service.id === Number(formData.service))?.price) > 0
-                      ? t.payNow
-                      : t.whatsappButton}
-                  </button>
-                )}
+                <a
+                  href="#"
+                  onClick={handleWhatsAppClick}
+                  className={`whatsapp-btn ${bookingStatus.type === 'checking' ? 'disabled' : ''}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-whatsapp"></i> {t.whatsappButton}
+                </a>
               </div>
             </form>
           </div>
