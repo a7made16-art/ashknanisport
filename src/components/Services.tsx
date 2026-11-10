@@ -312,23 +312,45 @@ const Services = ({ content, language }) => {
 
         void (async () => {
             try {
-                const response = await fetch('/api/montage/verify-payment', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        trackId: params.get('track_id'),
-                        reference,
-                        orderToken,
-                    }),
-                });
-                const result = await response.json();
-                if (!response.ok || result.paid !== true || !result.order) {
-                    throw new Error(result.error || 'Payment confirmation failed');
+                let verifiedOrder = null;
+                let orderSaved = false;
+                let notificationSent = true;
+                for (let attempt = 0; attempt < 3; attempt += 1) {
+                    const response = await fetch('/api/montage/verify-payment', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            trackId: params.get('track_id'),
+                            reference,
+                            orderToken,
+                        }),
+                    });
+                    const result = await response.json();
+                    if (response.status === 202 && result.pending === true && attempt < 2) {
+                        await new Promise((resolve) => window.setTimeout(resolve, 1200 * (attempt + 1)));
+                        continue;
+                    }
+                    if (!response.ok || result.paid !== true || !result.order) {
+                        throw new Error(result.error || 'Payment confirmation failed');
+                    }
+                    verifiedOrder = result.order;
+                    orderSaved = result.orderSaved === true;
+                    notificationSent = result.notificationSent !== false;
+                    break;
                 }
-                setPaidMontageOrder(result.order);
-                setMontagePaymentNotice(language === 'ar'
-                    ? 'تم تأكيد الدفع. اضغط لإرسال تفاصيل الطلب وروابط الصور عبر واتساب.'
-                    : 'Payment confirmed. Send the order details and photo links on WhatsApp.');
+                if (!verifiedOrder) throw new Error('Payment confirmation is still pending');
+                setPaidMontageOrder(verifiedOrder);
+                setMontagePaymentNotice(!orderSaved
+                    ? language === 'ar'
+                        ? `تم تأكيد الدفع لكن تعذر حفظ الطلب لدى الشركة. رقم الطلب: ${verifiedOrder.reference}. يرجى التواصل معنا.`
+                        : `Payment confirmed, but the order could not be saved for the company. Reference: ${verifiedOrder.reference}. Please contact us.`
+                    : !notificationSent
+                        ? language === 'ar'
+                            ? 'تم تأكيد الدفع وحفظ الطلب، لكن تعذر إرسال إشعار للشركة. يرجى التواصل معنا.'
+                            : 'Payment confirmed and order saved, but the company email notification failed. Please contact us.'
+                        : language === 'ar'
+                        ? 'تم تأكيد الدفع. اضغط لإرسال تفاصيل الطلب وروابط الصور عبر واتساب.'
+                        : 'Payment confirmed. Send the order details and photo links on WhatsApp.');
                 sessionStorage.removeItem(`montage-order:${reference}`);
             } catch (error) {
                 console.error('Montage payment confirmation failed:', error);

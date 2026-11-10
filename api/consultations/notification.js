@@ -1,10 +1,7 @@
-import { timingSafeEqual } from 'node:crypto';
 import {
-  createUPaymentsSignature,
-  getSiteUrl,
-  getUPaymentsConfig,
   getUPaymentsPayment,
-  isConfirmedUPaymentsPayment,
+  getUPaymentsPaymentChecks,
+  logUPaymentsVerification,
   verifySignedBooking,
   verifySignedMontageOrder,
 } from '../../server/consultationPayments.js';
@@ -20,14 +17,6 @@ async function readRawBody(req) {
   return Buffer.concat(chunks).toString('utf8');
 }
 
-function isValidSignature(received, expected) {
-  if (typeof received !== 'string') return false;
-  const receivedBytes = Buffer.from(received);
-  const expectedBytes = Buffer.from(expected);
-  return receivedBytes.length === expectedBytes.length
-    && timingSafeEqual(receivedBytes, expectedBytes);
-}
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -36,23 +25,6 @@ export default async function handler(req, res) {
 
   try {
     const rawBody = await readRawBody(req);
-    const timestamp = req.headers['x-timestamp'];
-    const signature = req.headers['x-signature'];
-    if (
-      typeof timestamp !== 'string'
-      || !/^\d{10}$/.test(timestamp)
-      || Math.abs(Math.floor(Date.now() / 1000) - Number(timestamp)) > 60
-    ) {
-      return res.status(401).json({ error: 'Invalid webhook timestamp' });
-    }
-
-    const notificationUrl = new URL('/api/consultations/notification', getSiteUrl()).toString();
-    const { apiSecret } = getUPaymentsConfig();
-    const expected = createUPaymentsSignature(apiSecret, timestamp, 'POST', notificationUrl, rawBody);
-    if (!isValidSignature(signature, expected)) {
-      return res.status(401).json({ error: 'Invalid webhook signature' });
-    }
-
     let payload;
     try {
       payload = JSON.parse(rawBody);
@@ -76,13 +48,28 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid order reference' });
     }
 
+    if (!trackId) {
+      return res.status(400).json({ error: 'Missing payment track ID' });
+    }
+
     const transaction = await getUPaymentsPayment(trackId);
-    if (!isConfirmedUPaymentsPayment(transaction, paidOrder, trackId)) {
+    const checks = getUPaymentsPaymentChecks(transaction, paidOrder, trackId);
+    logUPaymentsVerification('payment webhook', transaction, checks);
+    if (!Object.values(checks).every((check) => check === true)) {
       return res.status(400).json({ error: 'Payment does not match the order' });
     }
 
-    if (booking) await sendBookingEmail(reference, booking);
-    else await sendMontageOrderEmail(reference, montageOrder);
+    try {
+      const processingResult = booking
+        ? await sendBookingEmail(reference, booking)
+        : await sendMontageOrderEmail(reference, montageOrder);
+      console.info('Payment webhook paid-order processing finished:', processingResult);
+    } catch (error) {
+      console.error(
+        'Payment was confirmed but its order could not be saved or notified:',
+        error instanceof Error ? error.message : 'Unknown error',
+      );
+    }
     return res.status(200).json({ received: true });
   } catch (error) {
     console.error('UPayments notification processing failed:', error instanceof Error ? error.message : 'Unknown error');

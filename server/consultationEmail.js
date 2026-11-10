@@ -22,7 +22,7 @@ export function isGmailNotificationConfigured() {
   );
 }
 
-async function sendGmailNotification({ reference, subject, text, html }) {
+async function sendGmailNotification({ reference, subject, text, html, order }) {
   const url = process.env.GOOGLE_APPS_SCRIPT_URL;
   const secret = process.env.GOOGLE_APPS_SCRIPT_SECRET;
   if (!isGmailNotificationConfigured()) {
@@ -32,7 +32,7 @@ async function sendGmailNotification({ reference, subject, text, html }) {
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ reference, subject, text, html, secret }),
+    body: JSON.stringify({ reference, subject, text, html, order, secret }),
   });
   if (!response.ok) {
     console.error('Google Apps Script email request failed:', response.status);
@@ -40,10 +40,22 @@ async function sendGmailNotification({ reference, subject, text, html }) {
   }
 
   const result = await response.json();
+  if (result.saved === true && (result.result === 'sent' || result.result === 'already_sent')) {
+    return { orderSaved: true, notificationSent: true };
+  }
+  if (result.saved === true && result.stage === 'email') {
+    console.error('Paid order was saved but the company email was not sent:', result.error || 'Unknown error');
+    return { orderSaved: true, notificationSent: false };
+  }
+  if (result.saved !== true) {
+    console.error('Google Apps Script could not save the paid order:', result.error || 'Unknown error');
+    throw new Error('Paid order could not be saved');
+  }
   if (result.result !== 'sent' && result.result !== 'already_sent') {
     console.error('Google Apps Script could not send the notification:', result.error || 'Unknown error');
     throw new Error('Gmail notification delivery failed');
   }
+  throw new Error('Google Apps Script returned an invalid paid-order response');
 }
 
 export async function sendBookingEmail(reference, booking) {
@@ -66,11 +78,17 @@ export async function sendBookingEmail(reference, booking) {
     `UPayments reference: ${reference}`,
   ].join('\n');
 
-  await sendGmailNotification({
+  return sendGmailNotification({
     reference,
     subject,
     text,
     html: `<div dir="${booking.language === 'ar' ? 'rtl' : 'ltr'}"><h2>${escapeHtml(subject)}</h2><table>${renderRows(labels, values)}</table><p>UPayments reference: ${escapeHtml(reference)}</p></div>`,
+    order: {
+      type: 'consultation',
+      ...booking,
+      paymentStatus: 'paid',
+      paymentReference: reference,
+    },
   });
 }
 
@@ -109,10 +127,16 @@ export async function sendMontageOrderEmail(reference, order) {
     `UPayments reference: ${reference}`,
   ].join('\n');
 
-  await sendGmailNotification({
+  return sendGmailNotification({
     reference,
     subject,
     text,
     html: `<div dir="${order.language === 'ar' ? 'rtl' : 'ltr'}"><h2>${escapeHtml(subject)}</h2><table>${rows}</table><p>UPayments reference: ${escapeHtml(reference)}</p></div>`,
+    order: {
+      type: 'montage',
+      ...order,
+      paymentStatus: 'paid',
+      paymentReference: reference,
+    },
   });
 }

@@ -90,7 +90,7 @@ export function getService(serviceId, language) {
   };
 }
 
-export function validateBooking(input) {
+export function validateBooking(input, { allowPastDate = false } = {}) {
   const language = input?.language === 'en' ? 'en' : input?.language === 'ar' ? 'ar' : null;
   const service = getService(input?.serviceId, language);
   const name = typeof input?.name === 'string' ? input.name.trim() : '';
@@ -134,7 +134,7 @@ export function validateBooking(input) {
     day: '2-digit',
   }).formatToParts(new Date());
   const todayInKuwait = `${kuwaitDateParts.find((part) => part.type === 'year')?.value}-${kuwaitDateParts.find((part) => part.type === 'month')?.value}-${kuwaitDateParts.find((part) => part.type === 'day')?.value}`;
-  if (date < todayInKuwait) return null;
+  if (!allowPastDate && date < todayInKuwait) return null;
 
   if (date === todayInKuwait) {
     const nowInKuwait = new Intl.DateTimeFormat('en-US', {
@@ -177,7 +177,7 @@ export function signBooking(booking, reference) {
   return `${payload}.${signature}`;
 }
 
-export function verifySignedBooking(token) {
+export function verifySignedBooking(token, { allowExpired = false, allowPastDate = false } = {}) {
   if (typeof token !== 'string') return null;
   const [payload, signature, extra] = token.split('.');
   if (!payload || !signature || extra) return null;
@@ -196,11 +196,11 @@ export function verifySignedBooking(token) {
     if (
       typeof booking.reference !== 'string' ||
       typeof booking.expiresAt !== 'number' ||
-      booking.expiresAt < Date.now()
+      (!allowExpired && booking.expiresAt < Date.now())
     ) {
       return null;
     }
-    const validated = validateBooking(booking);
+    const validated = validateBooking(booking, { allowPastDate });
     if (!validated) return null;
     return { ...validated, reference: booking.reference };
   } catch {
@@ -319,7 +319,7 @@ export function signMontageOrder(order, reference) {
   return `${payload}.${signature}`;
 }
 
-export function verifySignedMontageOrder(token) {
+export function verifySignedMontageOrder(token, { allowExpired = false } = {}) {
   if (typeof token !== 'string') return null;
   const [payload, signature, extra] = token.split('.');
   if (!payload || !signature || extra) return null;
@@ -330,7 +330,11 @@ export function verifySignedMontageOrder(token) {
 
   try {
     const order = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'));
-    if (typeof order.reference !== 'string' || typeof order.expiresAt !== 'number' || order.expiresAt < Date.now()) {
+    if (
+      typeof order.reference !== 'string' ||
+      typeof order.expiresAt !== 'number' ||
+      (!allowExpired && order.expiresAt < Date.now())
+    ) {
       return null;
     }
     const validated = validateMontageOrder(order);
@@ -468,6 +472,10 @@ export async function getUPaymentsPayment(trackId) {
     );
     throw new Error('UPayments could not verify the payment');
   }
+  console.info('UPayments payment status lookup succeeded:', {
+    endpoint: 'GET /api/v1/get-payment-status/:track_id',
+    status: response.status,
+  });
   const data = await response.json();
   if (data.status !== true || !data.data?.transaction) {
     throw new Error('UPayments returned an incomplete payment status');
@@ -475,12 +483,35 @@ export async function getUPaymentsPayment(trackId) {
   return data.data.transaction;
 }
 
+export function getUPaymentsPaymentChecks(transaction, booking, trackId) {
+  const providerOrderReferences = [
+    transaction?.merchant_requested_order_id,
+    transaction?.requested_order_id,
+  ].filter((value) => typeof value === 'string' && value.length > 0);
+  const expectedAmount = booking.amount ?? booking.service.amount;
+  const paidAmount = Number(transaction?.total_price);
+
+  return {
+    resultCaptured: transaction?.result === 'CAPTURED',
+    trackIdMatches: transaction?.track_id === trackId,
+    requestedOrderIdMatches: providerOrderReferences.length > 0
+      && providerOrderReferences.every((value) => value === booking.reference),
+    currencyMatches: transaction?.currency_type === 'KWD',
+    amountMatches: Number.isFinite(paidAmount) && paidAmount === expectedAmount,
+  };
+}
+
+export function logUPaymentsVerification(stage, transaction, checks) {
+  console.info('UPayments payment verification:', {
+    stage,
+    result: typeof transaction?.result === 'string' ? transaction.result : 'UNKNOWN',
+    checks,
+  });
+}
+
 export function isConfirmedUPaymentsPayment(transaction, booking, trackId) {
-  return transaction?.result === 'CAPTURED'
-    && transaction?.track_id === trackId
-    && transaction?.merchant_requested_order_id === booking.reference
-    && transaction?.currency_type === 'KWD'
-    && Number(transaction?.total_price) === (booking.amount ?? booking.service.amount);
+  return Object.values(getUPaymentsPaymentChecks(transaction, booking, trackId))
+    .every((check) => check === true);
 }
 
 function getSigningSecret() {

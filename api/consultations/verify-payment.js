@@ -1,9 +1,11 @@
 import {
   getUPaymentsPayment,
-  isConfirmedUPaymentsPayment,
+  getUPaymentsPaymentChecks,
+  logUPaymentsVerification,
   validateRequestOrigin,
   verifySignedBooking,
 } from '../../server/consultationPayments.js';
+import { sendBookingEmail } from '../../server/consultationEmail.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -24,22 +26,31 @@ export default async function handler(req, res) {
     }
 
     const transaction = await getUPaymentsPayment(trackId);
-    if (!isConfirmedUPaymentsPayment(transaction, booking, trackId)) {
-      console.warn('UPayments consultation verification did not match:', {
-        resultCaptured: transaction?.result === 'CAPTURED',
-        trackIdMatches: transaction?.track_id === trackId,
-        orderReferenceMatches: transaction?.merchant_requested_order_id === booking.reference,
-        currencyMatches: transaction?.currency_type === 'KWD',
-        amountMatches: Number(transaction?.total_price) === booking.service.amount,
-      });
+    const checks = getUPaymentsPaymentChecks(transaction, booking, trackId);
+    logUPaymentsVerification('consultation return', transaction, checks);
+    if (!Object.values(checks).every((check) => check === true)) {
       if (transaction?.result !== 'CAPTURED') {
         return res.status(202).json({ paid: false, pending: true });
       }
       return res.status(402).json({ error: 'Payment has not completed' });
     }
 
+    let orderSaved = false;
+    let notificationSent = false;
+    try {
+      ({ orderSaved, notificationSent } = await sendBookingEmail(reference, booking));
+      console.info('Consultation paid-order processing finished:', { orderSaved, notificationSent });
+    } catch (error) {
+      console.error(
+        'Payment was confirmed but the consultation order could not be saved or notified:',
+        error instanceof Error ? error.message : 'Unknown error',
+      );
+    }
+
     return res.status(200).json({
       paid: true,
+      orderSaved,
+      notificationSent,
       booking: {
         name: booking.name,
         phone: booking.phone,

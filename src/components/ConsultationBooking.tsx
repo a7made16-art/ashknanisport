@@ -94,14 +94,16 @@ const [formData, setFormData] = useState({
       errorTime: 'الرجاء اختيار الوقت',
       checkingAvailability: 'جاري التحقق من توفر الموعد...',
       slotBooked: 'الميعاد محجوز بالفعل، اختر وقت آخر.',
-      bookingSuccess: 'تم تأكيد الدفع، وسيتم إرسال تفاصيل الحجز إلى الشركة.',
+      bookingSuccess: 'تم تأكيد الدفع وحفظ تفاصيل الحجز لدى الشركة.',
       freeBookingSuccess: 'تم فتح واتساب لإتمام الحجز المجاني.',
       payNow: 'المتابعة للدفع الإلكتروني',
       paymentCancelled: 'تم إلغاء الدفع. لم يتم تأكيد الحجز.',
       paymentError: 'تعذر تأكيد الدفع. حدّث الصفحة لإعادة المحاولة أو تواصل معنا.',
       checkoutFailed: 'تعذر بدء الدفع الآن. يرجى المحاولة لاحقًا أو التواصل معنا.',
       paymentAuthFailed: 'تعذر التحقق من إعدادات الدفع لدى الشركة. يرجى التواصل معنا.',
-      confirmingPayment: 'جاري تأكيد الدفع وإرسال تفاصيل الحجز...',
+      confirmingPayment: 'جاري تأكيد الدفع وحفظ تفاصيل الحجز...',
+      bookingSuccessEmailFailed: 'تم تأكيد الدفع وحفظ الحجز، لكن تعذر إرسال إشعار للشركة. يرجى التواصل معنا.',
+      bookingSaveFailed: (reference: string) => `تم تأكيد الدفع لكن تعذر حفظ الحجز لدى الشركة. رقم الطلب: ${reference}. يرجى التواصل معنا.`,
       whatsappMessage: (name: string, phone: string, serviceTitle: string, priceText: string, date: string, time: string) => 
         `مرحباً، أود حجز استشارة مع الكابتن أحمد جابر أشكناني\n\nالاسم: ${name}\nرقم الهاتف: ${phone}\nنوع الاستشارة: ${serviceTitle}\nالسعر: ${priceText}\nالتاريخ: ${date}\nالوقت: ${time}\n\nالعنوان: ${content.contact.address}\nرابط الخريطة: ${content.contact.mapUrl}`,
       whatsappButton: 'حجز عبر واتساب',
@@ -137,14 +139,16 @@ const [formData, setFormData] = useState({
       errorTime: 'Please select a time',
       checkingAvailability: 'Checking appointment availability...',
       slotBooked: 'This time slot is already booked. Please choose another.',
-      bookingSuccess: 'Payment confirmed. Booking details will be emailed to the company.',
+      bookingSuccess: 'Payment confirmed. The booking details have been saved for the company.',
       freeBookingSuccess: 'Opening WhatsApp to complete the free booking.',
       payNow: 'Continue to secure checkout',
       paymentCancelled: 'Payment was cancelled. The appointment is not confirmed.',
       paymentError: 'Could not confirm payment. Refresh to retry or contact us.',
       checkoutFailed: 'Could not start checkout. Please try again later or contact us.',
       paymentAuthFailed: 'The company payment configuration could not be authenticated. Please contact us.',
-      confirmingPayment: 'Confirming payment and sending booking details...',
+      confirmingPayment: 'Confirming payment and saving the booking details...',
+      bookingSuccessEmailFailed: 'Payment confirmed and booking saved, but the company notification email could not be sent. Please contact us.',
+      bookingSaveFailed: (reference: string) => `Payment confirmed, but the booking could not be saved for the company. Order reference: ${reference}. Please contact us.`,
       whatsappMessage: (name: string, phone: string, serviceTitle: string, priceText: string, date: string, time: string) => 
         `Hello, I would like to book a consultation with Captain Ahmed Jaber Ashkanani\n\nName: ${name}\nPhone: ${phone}\nConsultation Type: ${serviceTitle}\nPrice: ${priceText}\nDate: ${date}\nTime: ${time}\n\nAddress: ${content.contact.address}\nMap Link: ${content.contact.mapUrl}`,
       whatsappButton: 'Book via WhatsApp',
@@ -508,6 +512,8 @@ useEffect(() => {
         date: string;
         time: string;
       } | null = null;
+      let orderSaved = false;
+      let notificationSent = true;
       for (let attempt = 0; attempt < 3; attempt += 1) {
         const response = await fetch('/api/consultations/verify-payment', {
           method: 'POST',
@@ -523,6 +529,8 @@ useEffect(() => {
           throw new Error(typeof result.error === 'string' ? result.error : 'Payment confirmation failed');
         }
         verifiedBooking = result.booking;
+        orderSaved = result.orderSaved === true;
+        notificationSent = result.notificationSent !== false;
         break;
       }
 
@@ -537,8 +545,10 @@ useEffect(() => {
         }),
       });
       setBookingStatus({
-        type: 'success',
-        message: t.bookingSuccess,
+        type: orderSaved ? 'success' : 'error',
+        message: !orderSaved
+          ? t.bookingSaveFailed(reference)
+          : notificationSent ? t.bookingSuccess : t.bookingSuccessEmailFailed,
       });
       sessionStorage.removeItem(`consultation-booking:${reference}`);
       window.history.replaceState({}, '', window.location.pathname);

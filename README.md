@@ -34,6 +34,7 @@ Set these environment variables in the Vercel project before enabling live check
 | `CLOUDINARY_API_KEY` | Optional override; defaults to the API key provided for this project |
 | `CLOUDINARY_API_SECRET` | Cloudinary API secret; used only by the Vercel signature endpoint |
 | `BOOKING_SIGNING_SECRET` | Random secret of at least 32 characters used to protect booking details during checkout |
+| `PAYMENT_RECOVERY_SECRET` | Optional random secret of at least 32 characters for manually recovering an already captured payment |
 | `GOOGLE_APPS_SCRIPT_URL` | Deployed Gmail notification web app URL |
 | `GOOGLE_APPS_SCRIPT_SECRET` | Shared random secret, at least 32 characters, also stored in Apps Script properties |
 
@@ -60,17 +61,43 @@ the script, add a Script Property named `NOTIFICATION_SECRET` with the same
 random value used for `GOOGLE_APPS_SCRIPT_SECRET`, then deploy it as a Web App:
 execute as your account and allow access to anyone. Add the deployment URL and
 the shared secret to the Vercel environment variables, then redeploy. The script
-rejects deployment under a different Gmail account and uses a short-lived
-idempotency cache for duplicate payment notifications. Gmail sending quotas
-apply.
+rejects deployment under a different Gmail account, creates a company-owned
+Google spreadsheet on first use, and saves each verified paid order once before
+sending the notification. Duplicate rows and emails are suppressed across
+repeated callbacks and recovery attempts. After changing `Code.gs`, publish a
+new web-app deployment version and approve its Sheets and Gmail permissions.
+Gmail sending quotas apply.
 
 The API validates consultation prices on the server in
 [`server/consultationPayments.js`](./server/consultationPayments.js); update that
 catalog together with `public/company.json` if prices change. The no-fee service
 continues directly to WhatsApp and does not request payment. Email notifications
-are sent by the signed UPayments server-to-server notification after the payment
-is confirmed through UPayments' status API. The browser return also checks payment
-status to show the customer the result, but it does not trigger the company email.
+are sent after an authenticated UPayments status lookup confirms the transaction,
+both from the UPayments server-to-server notification and the customer return
+verification. Both paths verify the signed order data, captured result, track ID,
+order reference, currency, and exact amount. Duplicate email requests are
+deduplicated by the Apps Script. The browser return never confirms payment by
+itself.
+
+To retry notification for a payment that was captured but not notified, configure
+`PAYMENT_RECOVERY_SECRET` and make an authenticated `POST` to
+`/api/admin/recover-payment` with `{"trackId":"<UPayments track ID>"}` and the
+`x-payment-recovery-secret` header. The endpoint independently checks the
+captured transaction, signed order, track ID, merchant order reference, KWD
+currency, and exact amount before sending the company's notification email. It
+does not create another charge. Recovery depends on UPayments returning the
+original signed `customer_extra_data`; if it is unavailable or the signing
+secret has changed, contact UPayments and reconcile the transaction manually.
+
+The Google Apps Script spreadsheet is the durable record of verified paid
+consultation and montage orders; it is created automatically under the company
+Google account the first time a verified order is processed. Email notifications
+are sent only to `Ashkananisport@gmail.com`, never to the customer. The checkout
+forms currently do not collect a customer email address. WhatsApp is a prefilled
+message that the customer must send manually;
+automatic WhatsApp delivery requires a separately configured WhatsApp Business
+API. Payment status is verified server-side before the order is saved or the
+company email is sent.
 The existing availability integration runs before checkout, so verify
 its calendar behavior and clear unpaid holds if a customer abandons checkout.
 
