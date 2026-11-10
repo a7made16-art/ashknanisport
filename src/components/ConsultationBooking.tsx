@@ -28,6 +28,7 @@ interface ConsultationBookingProps {
       address: string;
       phone: number;
       email: string;
+      mapUrl: string;
       mapEmbedUrl: string;
     };
   };
@@ -82,7 +83,8 @@ const [formData, setFormData] = useState({
   // النصوص المترجمة حسب اللغة
   const translations = {
     ar: {
-      officeTitle: 'مكتب الكابتن أحمد جابر أشكناني',
+      officeTitle: 'مكتب الكابتن أ. أحمد جابر أشكناني',
+      officeMapLink: '📌 موقع المكتب على خرائط Google',
       errorName: 'الرجاء إدخال الاسم',
       errorPhone: 'الرجاء إدخال رقم الهاتف',
       errorPhoneInvalid: 'رقم الهاتف غير صحيح',
@@ -101,7 +103,7 @@ const [formData, setFormData] = useState({
       paymentAuthFailed: 'تعذر التحقق من إعدادات الدفع لدى الشركة. يرجى التواصل معنا.',
       confirmingPayment: 'جاري تأكيد الدفع وإرسال تفاصيل الحجز...',
       whatsappMessage: (name: string, phone: string, serviceTitle: string, priceText: string, date: string, time: string) => 
-        `مرحباً، أود حجز استشارة مع الكابتن أحمد جابر أشكناني\n\nالاسم: ${name}\nرقم الهاتف: ${phone}\nنوع الاستشارة: ${serviceTitle}\nالسعر: ${priceText}\nالتاريخ: ${date}\nالوقت: ${time}\n\nالعنوان: ${content.contact.address}\nرابط الخريطة: https://maps.app.goo.gl/CapKa1grxPnRLe9b9?g_st=ic`,
+        `مرحباً، أود حجز استشارة مع الكابتن أحمد جابر أشكناني\n\nالاسم: ${name}\nرقم الهاتف: ${phone}\nنوع الاستشارة: ${serviceTitle}\nالسعر: ${priceText}\nالتاريخ: ${date}\nالوقت: ${time}\n\nالعنوان: ${content.contact.address}\nرابط الخريطة: ${content.contact.mapUrl}`,
       whatsappButton: 'حجز عبر واتساب',
       mapPlaceholder: 'معلومات الخريطة غير متوفرة',
       selectService: 'اختر الاستشارة',
@@ -125,6 +127,7 @@ const [formData, setFormData] = useState({
     },
     en: {
       officeTitle: 'Captain Ahmed Jaber Ashkanani Office',
+      officeMapLink: '📌 View office on Google Maps',
       errorName: 'Please enter your name',
       errorPhone: 'Please enter your phone number',
       errorPhoneInvalid: 'Invalid phone number',
@@ -143,7 +146,7 @@ const [formData, setFormData] = useState({
       paymentAuthFailed: 'The company payment configuration could not be authenticated. Please contact us.',
       confirmingPayment: 'Confirming payment and sending booking details...',
       whatsappMessage: (name: string, phone: string, serviceTitle: string, priceText: string, date: string, time: string) => 
-        `Hello, I would like to book a consultation with Captain Ahmed Jaber Ashkanani\n\nName: ${name}\nPhone: ${phone}\nConsultation Type: ${serviceTitle}\nPrice: ${priceText}\nDate: ${date}\nTime: ${time}\n\nAddress: ${content.contact.address}\nMap Link: https://maps.app.goo.gl/CapKa1grxPnRLe9b9?g_st=ic`,
+        `Hello, I would like to book a consultation with Captain Ahmed Jaber Ashkanani\n\nName: ${name}\nPhone: ${phone}\nConsultation Type: ${serviceTitle}\nPrice: ${priceText}\nDate: ${date}\nTime: ${time}\n\nAddress: ${content.contact.address}\nMap Link: ${content.contact.mapUrl}`,
       whatsappButton: 'Book via WhatsApp',
       mapPlaceholder: 'Map information is unavailable',
       selectService: 'Select Consultation',
@@ -498,23 +501,39 @@ useEffect(() => {
   setBookingStatus({ type: 'checking', message: t.confirmingPayment });
   void (async () => {
     try {
-      const response = await fetch('/api/consultations/verify-payment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ trackId, reference, bookingToken }),
-      });
-      const result = await response.json();
-      if (!response.ok || result.paid !== true || !result.booking) {
-        throw new Error(typeof result.error === 'string' ? result.error : 'Payment confirmation failed');
+      let verifiedBooking: {
+        name: string;
+        phone: string;
+        serviceId: number;
+        date: string;
+        time: string;
+      } | null = null;
+      for (let attempt = 0; attempt < 3; attempt += 1) {
+        const response = await fetch('/api/consultations/verify-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ trackId, reference, bookingToken }),
+        });
+        const result = await response.json();
+        if (response.status === 202 && result.pending === true && attempt < 2) {
+          await new Promise((resolve) => window.setTimeout(resolve, 1200 * (attempt + 1)));
+          continue;
+        }
+        if (!response.ok || result.paid !== true || !result.booking) {
+          throw new Error(typeof result.error === 'string' ? result.error : 'Payment confirmation failed');
+        }
+        verifiedBooking = result.booking;
+        break;
       }
 
+      if (!verifiedBooking) throw new Error('Payment confirmation is still pending');
       setPaidBooking({
         whatsappUrl: createWhatsAppLink({
-          name: result.booking.name,
-          phone: result.booking.phone,
-          service: result.booking.serviceId,
-          date: result.booking.date,
-          time: result.booking.time,
+          name: verifiedBooking.name,
+          phone: verifiedBooking.phone,
+          service: verifiedBooking.serviceId,
+          date: verifiedBooking.date,
+          time: verifiedBooking.time,
         }),
       });
       setBookingStatus({
@@ -563,6 +582,15 @@ useEffect(() => {
           <div className="consultation-info">
             <div className="office-info">
               <h3>{t.officeTitle}</h3>
+              <p className="office-address">{content.contact.address}</p>
+              <a
+                className="office-map-link"
+                href={content.contact.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t.officeMapLink}
+              </a>
               <p>{content.workingDays}</p>
               <p>{content.workingHours}</p>
             </div>

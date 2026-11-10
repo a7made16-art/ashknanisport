@@ -25,6 +25,16 @@ export default async function handler(req, res) {
 
     const transaction = await getUPaymentsPayment(trackId);
     if (!isConfirmedUPaymentsPayment(transaction, booking, trackId)) {
+      console.warn('UPayments consultation verification did not match:', {
+        resultCaptured: transaction?.result === 'CAPTURED',
+        trackIdMatches: transaction?.track_id === trackId,
+        orderReferenceMatches: transaction?.merchant_requested_order_id === booking.reference,
+        currencyMatches: transaction?.currency_type === 'KWD',
+        amountMatches: Number(transaction?.total_price) === booking.service.amount,
+      });
+      if (transaction?.result !== 'CAPTURED') {
+        return res.status(202).json({ paid: false, pending: true });
+      }
       return res.status(402).json({ error: 'Payment has not completed' });
     }
 
