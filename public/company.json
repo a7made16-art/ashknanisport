@@ -724,12 +724,6 @@
           "title": "Professional sports management culture lecture",
           "price": 40,
           "description": "Developing administrative skills"
-        },
-        {
-          "id": 7,
-          "title": "Booking for signing or attending an official meeting for players and coaches who have joined us.",
-          "price": "no fees",
-          "description": "A dedicated service for players and coaches who have joined our company, allowing them to book official appointments for contract signing or organizational meetings with our team to ensure a professional start and successful collaboration."
         }
       ],
       "form": {
@@ -1672,12 +1666,6 @@
           "title": "محاضره الثقافه الاداريه الاحترافيه الرياضيه",
           "price": 40,
           "description": "تطوير المهارات الإدارية"
-        },
-        {
-          "id": 7,
-          "title": "الحجز للتوقيع أو لحضور اجتماع رسمي للاعبين والمدربين المنضمين إلينا",
-          "price": "معفي من الرسوم",
-          "description": "خدمة مخصّصة للاعبين والمدربين المنضمين إلى شركتنا، تتيح لهم حجز موعد رسمي لتوقيع العقود أو حضور الاجتماعات التنظيمية مع فريقنا، لضمان بداية احترافية وتعاون ناجح."
         }
       ],
       "form": {
